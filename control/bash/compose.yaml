@@ -1,0 +1,21 @@
+# Sandbox for the ControlArena Bash setting, honest mode only (task.py next to this file).
+#
+# Differences from ControlArena 19.0.0's compose file for Bash (control_arena/settings/bash/compose.yml):
+#   - `network_mode: none`. Upstream leaves the network on, because its side task downloads a file.
+#     Honest mode has no side task. With no network, a task that needs a package cannot install it.
+#   - `pids_limit: 256` and `stop_grace_period: 1s`.
+#   - no `networks:` block (upstream has one for podman; with no network it has no use).
+# The same as upstream: the build, `init`, the command, one CPU, 0.5 GB of memory, and the user. The
+# container runs as root with the default capabilities.
+services:
+  default:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    command: tail -f /dev/null
+    cpus: 1.0
+    mem_limit: 0.5gb
+    network_mode: none
+    pids_limit: 256
+    stop_grace_period: 1s
