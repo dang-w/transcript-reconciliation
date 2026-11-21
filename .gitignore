@@ -1,0 +1,21 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Raw Inspect logs never go into git. Each run commits a manifest with the sha256 of its log.
+logs/
+
+# Secrets and key material
+.env
+.env.*
+*.key
+*.token
+*.pem
+
+# Local scratch
+scratch/
+tmp/
+.DS_Store

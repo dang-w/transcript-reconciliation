@@ -1,0 +1,37 @@
+#!/bin/sh
+# Refuse a commit that contains a secret, a tailnet or private network address, a tailnet or mDNS name,
+# a home-directory path, a string of the local denylist, or the contents of a local key file.
+# Enable once per clone:  git config core.hooksPath .githooks
+set -eu
+
+command -v gitleaks >/dev/null 2>&1 || {
+  echo "pre-commit: gitleaks is not installed (brew install gitleaks); commit refused" >&2
+  exit 1
+}
+gitleaks git --pre-commit --staged --redact --no-banner .
+
+# Host names, user names and service hosts that must not be published: one per line, in a file outside
+# the repository (the same file reconcile/scan.py reads). Whole-word match on the added lines.
+denylist="${TR_DENYLIST:-$HOME/.config/transcript-reconciliation/denylist.txt}"
+if [ ! -r "$denylist" ]; then
+  echo "pre-commit: the denylist file is missing, so names cannot be checked; commit refused" >&2
+  exit 1
+fi
+words=$(grep -v -e '^#' -e '^[[:space:]]*$' "$denylist" || true)
+if [ -n "$words" ] && git diff --cached --no-color -U0 | grep '^+' | grep -q -w -F -e "$words"; then
+  echo "pre-commit: the staged change contains a string of the denylist; commit refused" >&2
+  exit 1
+fi
+
+# The exact contents of local key files must never be staged, whatever their format.
+# TR_KEY_FILES replaces the list (colon-separated); the tests of this hook use it.
+files="${TR_KEY_FILES:-$HOME/.config/llama/research.key}"
+old_ifs=$IFS; IFS=:
+for f in $files; do
+  [ -s "$f" ] || continue
+  if git diff --cached --no-color -U0 | grep -q -F -f "$f"; then
+    echo "pre-commit: the staged change contains the contents of a local key file; commit refused" >&2
+    exit 1
+  fi
+done
+IFS=$old_ifs

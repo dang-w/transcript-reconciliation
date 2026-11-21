@@ -1,0 +1,42 @@
+# gitleaks configuration. This repository is public from its first commit, so the hook in
+# .githooks/pre-commit scans every staged change with the default rules and with more
+# rules for things that are not secrets in the usual sense but must not be published.
+title = "transcript-reconciliation"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "tailnet-address"
+description = "Tailscale address (100.64/10)"
+regex = '''\b100\.(?:6[4-9]|[7-9][0-9]|1[01][0-9]|12[0-7])\.[0-9]{1,3}\.[0-9]{1,3}\b'''
+
+[[rules]]
+id = "tailnet-name"
+description = "Tailscale MagicDNS name"
+regex = '''\b[a-z0-9-]+\.ts\.net\b'''
+
+[[rules]]
+id = "home-directory-path"
+description = "Absolute path into a home directory"
+regex = '''/(?:Users|home)/[A-Za-z0-9._-]+/'''
+
+[[rules]]
+id = "private-network-address"
+description = "RFC 1918 address (10/8, 172.16/12, 192.168/16)"
+regex = '''(?:^|[^0-9.])(?:10\.[0-9]{1,3}|172\.(?:1[6-9]|2[0-9]|3[01])|192\.168)\.[0-9]{1,3}\.[0-9]{1,3}(?:[^0-9.]|$)'''
+
+[[rules]]
+id = "local-host-name"
+description = "mDNS host name"
+regex = '''\b[A-Za-z0-9-]+\.local\b'''
+
+# Inspect logs keep attachments in a JSON object keyed by 32-hex ids. When the value before such a key
+# ends with one of a rule's keywords, gitleaks reads the next key as a secret. Allow exactly that
+# shape, for every rule: a closing quote, a comma, then a 32-hex JSON *key*. A 32-hex *value*
+# (`"key": "<hex>"`) stays a finding. The scan looks for the contents of the real key files on its own.
+[allowlist]
+regexTarget = "match"
+regexes = [
+  '''"\s*,\s*"[0-9a-f]{32}"$''',
+]
