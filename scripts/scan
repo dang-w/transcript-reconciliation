@@ -1,0 +1,6 @@
+#!/bin/sh
+# The scan for private identifiers (reconcile/scan.py): files, directories, Inspect .eval logs.
+#   scripts/scan PATH [PATH ...]
+cd "$(dirname "$0")/.." || exit 1
+. scripts/env.sh
+exec uv run python -m reconcile.scan "$@"
