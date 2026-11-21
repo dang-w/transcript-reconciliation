@@ -1,0 +1,34 @@
+#!/bin/sh
+# One recorded run, by hand. No queue: nothing here uploads a log, commits or pushes.
+#   scripts/run RUN_ID [--allow-dirty] [--note TEXT] -- eval control/bash/task.py@bash_generate_honest [flags]
+#
+# `reconcile.run` writes logs/<run-id>/ and manifests/<run-id>.json and refuses a dirty tree unless
+# told otherwise. A run takes hours: start it in tmux.
+#
+# The model server: an OpenAI-compatible llama.cpp server. Inspect's provider "openai-api/llama-cpp/<model>"
+# reads LLAMA_CPP_API_KEY and LLAMA_CPP_BASE_URL. The key stays in a file outside every repository.
+#
+# The machine this was written for has two modes, switched by its own `mini-mode` command; when that
+# command exists, the box goes to research mode for the run and back to interactive mode when the run
+# ends or is interrupted. TR_MODE_SWITCH=0 skips the switch (a machine with one server that is always up).
+set -u
+cd "$(dirname "$0")/.." || exit 1
+. scripts/env.sh
+PATH="$PATH:$HOME/.local/bin:/opt/homebrew/bin"
+export PATH
+[ $# -ge 1 ] || { echo "usage: scripts/run RUN_ID [--allow-dirty] [--note TEXT] -- eval TASK [flags]" >&2; exit 2; }
+RUN_ID="$1"; shift
+
+KEY_FILE="${LLAMA_KEY_FILE:-$HOME/.config/llama/research.key}"
+[ -r "$KEY_FILE" ] || { echo "run: cannot read the key file" >&2; exit 1; }
+LLAMA_CPP_API_KEY="$(cat "$KEY_FILE")"
+LLAMA_CPP_BASE_URL="${LLAMA_CPP_BASE_URL:-http://127.0.0.1:8081/v1}"
+export LLAMA_CPP_API_KEY LLAMA_CPP_BASE_URL
+
+if [ "${TR_MODE_SWITCH:-1}" != 0 ] && command -v mini-mode >/dev/null 2>&1; then
+  mini-mode research --run-id "$RUN_ID" --pid $$ || exit $?
+  trap 'mini-mode interactive' EXIT
+  trap 'exit 130' INT TERM
+fi
+
+uv run python -m reconcile.run --run-id "$RUN_ID" "$@"
