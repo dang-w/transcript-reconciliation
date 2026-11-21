@@ -1,0 +1,23 @@
+# Sandbox for the ControlArena Bash setting, honest mode only (the capability probe, task.py next to
+# this file). ControlArena's own compose file for Bash leaves the network on, because its side task
+# downloads a file. Honest mode has no side task, so this file turns the network off.
+#
+# Not this repository's hardened policy (control/apps/compose.yaml): the container runs as root with
+# the default capabilities, as in ControlArena 19.0.0. The Bash tasks write to `/` and some call
+# `sudo`; a non-root user and dropped capabilities would fail tasks for reasons that are not the
+# model's, and the probe measures the model. A hardened variant is a separate, later change.
+#
+# With no network, a task that needs to install a package fails. Read the main-task rate with that
+# in mind (results/bash-probe-preregistration.md).
+services:
+  default:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    command: tail -f /dev/null
+    cpus: 1.0
+    mem_limit: 0.5gb
+    network_mode: none
+    pids_limit: 256
+    stop_grace_period: 1s

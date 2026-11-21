@@ -1,0 +1,277 @@
+{
+  "command": [
+    "inspect",
+    "eval",
+    "control/bash/task.py@bash_generate_honest",
+    "--limit",
+    "1-5",
+    "--max-samples",
+    "1",
+    "--time-limit",
+    "5400",
+    "--message-limit",
+    "40",
+    "--no-fail-on-error",
+    "--log-dir",
+    "logs/f1-gen-bash-honest-probe"
+  ],
+  "container_images": [
+    {
+      "architecture": "arm64",
+      "id": "sha256:0f35a39bd2f9222999096eccabdfb32157491e024222f7e237a81d97b0b80d42",
+      "name": "0f35a39bd2f9",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:288e24025ee9b5989059d4b242bf7cf9e4865fcdf98e67831f63b74897cef9b2",
+      "name": "288e24025ee9",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:45217185c976830fbc7ad92a0aa9fd386f1f7fdb769fabbf505bee175c8987ce",
+      "name": "45217185c976",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:4bfc0a20b2eaaf6b3c2378f7fc85064c97f50dc8fd41ebaad7be878ff19ee234",
+      "name": "4bfc0a20b2ea",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:4e372f4352f20ab6900fc651497f8268f06bea3694adc0d775ee2cda44486b7e",
+      "name": "4e372f4352f2",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:79b7a9553b2c8d7816910438ca911bb99817f51fc4b4c78525aca84aefd909b2",
+      "name": "79b7a9553b2c",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:89408c8b9717f3131e88e93c06c3fb1d0f586559914cf3691f929bf2071503a9",
+      "name": "89408c8b9717",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:947c16f48c0ecd113f1d8a0df95de1eec54bb8bed676dba52137c63f9679fd93",
+      "name": "947c16f48c0e",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:eac9da9ad2ef80a1bf96abc8d2a309b1a1a363dff9d2d3503103cc79bb44e7d4",
+      "name": "eac9da9ad2ef",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:ec08e1ecce849335147844091a3fd05407f52090be9688e4c40021305109f250",
+      "name": "ec08e1ecce84",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf",
+      "name": "f59abe656b69",
+      "repo_digests": [
+        "alpine@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:c83aca26da1082863edff41ff50a1fb61396676e0f4b7ed1b37faa7b6ef98c24",
+      "name": "inspect-bash_generat-i4aywzt-default",
+      "repo_digests": [
+        "inspect-bash_generat-i4aywzt-default@sha256:c83aca26da1082863edff41ff50a1fb61396676e0f4b7ed1b37faa7b6ef98c24"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:3567f0495b7bd8fab0a5e3cb2b30ec401eab22fbe6515d14825c7ebf786d978d",
+      "name": "inspect-bash_generat-ignw9qc-default",
+      "repo_digests": [
+        "inspect-bash_generat-ignw9qc-default@sha256:3567f0495b7bd8fab0a5e3cb2b30ec401eab22fbe6515d14825c7ebf786d978d"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:d68f30e330e71e20723af4cc39ccab5c366ce1943f99f0cd248cb57603af47de",
+      "name": "inspect-bash_generat-ir7uj6p-default",
+      "repo_digests": [
+        "inspect-bash_generat-ir7uj6p-default@sha256:d68f30e330e71e20723af4cc39ccab5c366ce1943f99f0cd248cb57603af47de"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:5fc8f4951d66da33445513548dd681f769a2714402ef5b306abf23dc3cf6446d",
+      "name": "inspect-bash_generat-iujf28h-default",
+      "repo_digests": [
+        "inspect-bash_generat-iujf28h-default@sha256:5fc8f4951d66da33445513548dd681f769a2714402ef5b306abf23dc3cf6446d"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:806f64c85d353d2eab895c9a2a207c8215a0923ae057868692b1009af6d822b7",
+      "name": "inspect-bash_generat-iwyjvdw-default",
+      "repo_digests": [
+        "inspect-bash_generat-iwyjvdw-default@sha256:806f64c85d353d2eab895c9a2a207c8215a0923ae057868692b1009af6d822b7"
+      ]
+    }
+  ],
+  "dataset": "dang-w/trusted-monitoring-logs",
+  "ended": "2026-11-17T19:30:18+00:00",
+  "exit_code": 0,
+  "llama_cpp": {
+    "build": 11612,
+    "commit": "10da8c463",
+    "version": "0.6.0-dev"
+  },
+  "logs": [
+    {
+      "bytes": 221205,
+      "completed": "2026-11-17T19:30:17+00:00",
+      "completed_samples": 5,
+      "dataset_path": "runs/f1-gen-bash-honest-probe/2026-11-17T17-57-04-00-00_bash-generate-honest_hpHwAmyrMqyFnhqcWwebh6.eval",
+      "eval_config": {
+        "continue_on_fail": false,
+        "epochs": 1,
+        "fail_on_error": false,
+        "limit": [
+          0,
+          5
+        ],
+        "log_images": true,
+        "log_realtime": true,
+        "log_samples": true,
+        "log_shared": 0,
+        "max_samples": 1,
+        "message_limit": 40,
+        "sandbox_cleanup": true,
+        "sandbox_prebuilt": false,
+        "score_display": true,
+        "score_on_error": false,
+        "time_limit": 5400,
+        "token_limit": 1000000
+      },
+      "file": "2026-11-17T17-57-04-00-00_bash-generate-honest_hpHwAmyrMqyFnhqcWwebh6.eval",
+      "generate_config": {},
+      "inspect_run_id": "bPWxbKshgSkXESEsXpYZrE",
+      "model": "none/none",
+      "model_roles": {
+        "trusted": {
+          "config": {
+            "max_tokens": 4096,
+            "seed": 1,
+            "temperature": 0.0
+          },
+          "model": "openai-api/llama-cpp/ministral-3-8b"
+        },
+        "untrusted": {
+          "config": {
+            "max_tokens": 16384,
+            "seed": 1,
+            "temperature": 0.0
+          },
+          "model": "openai-api/llama-cpp/qwen3.8-27b"
+        }
+      },
+      "revision": {
+        "commit": "a5d12ed",
+        "dirty": true
+      },
+      "samples": 257,
+      "sandbox": {
+        "config": "compose.yaml",
+        "type": "docker"
+      },
+      "sha256": "459d7206887bcc70c826041c5ad704ec4b490494f48ef93f447a2271f02acb01",
+      "started": "2026-11-17T17:57:04+00:00",
+      "status": "success",
+      "task": "bash_generate_honest"
+    }
+  ],
+  "mode_switch_log": [
+    {
+      "command": "research",
+      "event": "start",
+      "force": false,
+      "run_id": "f1-gen-bash-honest-probe",
+      "ts": "2026-11-17T17:55:55+00:00"
+    },
+    {
+      "command": "research",
+      "container_vm": "running",
+      "event": "done",
+      "run_id": "f1-gen-bash-honest-probe",
+      "seconds": 14.1,
+      "ts": "2026-11-17T17:56:09+00:00"
+    }
+  ],
+  "models": [
+    {
+      "file": "Ministral-3-8B-Instruct-2512-Q8_0.gguf",
+      "id": "ministral-3-8b",
+      "server": null,
+      "sha256": "bd0ca58473b64618df4d08c1410cc25c910ca84e647833ebaf099e0fc0523b45",
+      "slots": {
+        "ctx_size": null,
+        "kv_unified_per_slot": 32768,
+        "n_predict": 4096,
+        "parallel": 4,
+        "reasoning_budget": null
+      }
+    },
+    {
+      "file": "Qwen3.8-27B-UD-Q4_K_XL.gguf",
+      "id": "qwen3.8-27b",
+      "server": {
+        "build_info": "b11612-10da8c463",
+        "n_ctx": 32768,
+        "sampling_defaults": {
+          "min_p": 0.05000000074505806,
+          "n_predict": -1,
+          "repeat_penalty": 1.0,
+          "seed": 4294967295,
+          "temperature": 1.0,
+          "top_k": 20,
+          "top_p": 0.949999988079071
+        },
+        "total_slots": 4
+      },
+      "sha256": "3f227079003add2511437e5b1e94812e363385225bf6a9b47b0054a72bc8b01e",
+      "slots": {
+        "ctx_size": null,
+        "kv_unified_per_slot": 32768,
+        "n_predict": 4096,
+        "parallel": 4,
+        "reasoning_budget": 12288
+      }
+    }
+  ],
+  "note": "Private tool-use capability probe (Dan 2026-11-17): honest policy, first 5 Bash tasks, network off; not published",
+  "presets": {
+    "file": "models.research.ini",
+    "sha256": "e6ed8bf8086c256ec9c3a47cdd27076ff4abbe8b73a439ff01e5b17df77ecb89"
+  },
+  "repo": {
+    "commit": "a5d12ed30d06a1bb38df381702456dd908dfa305",
+    "dirty": true
+  },
+  "run_id": "f1-gen-bash-honest-probe",
+  "schema": 1,
+  "started": "2026-11-17T17:56:09+00:00",
+  "status": "completed",
+  "versions": {
+    "control_arena": "19.0.0",
+    "inspect_ai": "0.3.275",
+    "python": "3.12.14",
+    "uv_lock_sha256": "215309e2987c283263d5da96410b7c0c3c0e7b118c8196fb06a8050662c948bd"
+  }
+}

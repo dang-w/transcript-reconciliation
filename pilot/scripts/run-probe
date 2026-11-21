@@ -1,0 +1,27 @@
+#!/bin/sh
+# The Bash tool-use probe, by hand, in this clone only (results/bash-probe-preregistration.md).
+#   scripts/run-probe            start it in tmux: the run takes up to 7.5 hours
+#
+# Not the queue: nothing here publishes a log, commits or pushes. `tm.run` writes logs/<run-id>/ and
+# manifests/<run-id>.json in this clone. The box goes to research mode for the run and back to
+# interactive mode when the run ends or is interrupted.
+set -u
+cd "$(dirname "$0")/.." || exit 1
+. scripts/env.sh
+PATH="$PATH:$HOME/.local/bin:/opt/homebrew/bin"
+export PATH
+RUN_ID="${1:-f1-gen-bash-honest-probe}"
+
+if git remote | grep -q .; then
+  echo "run-probe: this clone has a remote; the probe runs only in a clone without one" >&2
+  exit 1
+fi
+
+mini-mode research --run-id "$RUN_ID" --pid $$ || exit $?
+trap 'mini-mode interactive' EXIT
+trap 'exit 130' INT TERM
+
+uv run python -m tm.run --run-id "$RUN_ID" \
+  --note "Private tool-use capability probe (Dan 2026-11-17): honest policy, first 5 Bash tasks, network off; not published" \
+  -- eval control/bash/task.py@bash_generate_honest \
+  --limit 1-5 --max-samples 1 --time-limit 5400 --message-limit 40 --no-fail-on-error
