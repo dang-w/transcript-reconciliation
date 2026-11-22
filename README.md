@@ -21,8 +21,8 @@ It does not build a kernel-level recorder.
 
 | | |
 |---|---|
-| Runs in this repository | None yet |
-| Logs | The dataset [`dang-w/transcript-reconciliation-logs`](https://huggingface.co/datasets/dang-w/transcript-reconciliation-logs), empty until the first run. Git holds a manifest for each run with the sha256 of its log. |
+| Runs in this repository | None yet. The first, run A, is pre-registered: `results/run-a-replication-preregistration.md` and `results/run-a-layer1-preregistration.md`. It does not start before the author commits his predictions. |
+| Logs | The dataset [`dang-w/transcript-reconciliation-logs`](https://huggingface.co/datasets/dang-w/transcript-reconciliation-logs). It holds no log until the first run is published. Git holds a manifest for each run with the sha256 of its log. |
 | Pilot | One private run of 5 samples on 17 November 2026: honest mode, one model, one setting. `pilot/README.md` |
 | Code | A readout, a scan for private identifiers, a run wrapper that writes a manifest, an upload step that a person starts. No reconciler yet. |
 | Survey | `docs/survey-2026-11-21.md`: versions, the Bash setting and Inspect's sandbox events across versions, the packages the tasks need |
