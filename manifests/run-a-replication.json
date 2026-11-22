@@ -1,0 +1,258 @@
+{
+  "allow_dirty": false,
+  "command": [
+    "inspect",
+    "eval",
+    "control/bash/task.py@bash_generate_honest",
+    "--limit",
+    "1-5",
+    "--max-samples",
+    "1",
+    "--time-limit",
+    "5400",
+    "--message-limit",
+    "40",
+    "--no-fail-on-error",
+    "--display",
+    "plain",
+    "--log-dir",
+    "logs/run-a-replication"
+  ],
+  "container_images": [
+    {
+      "architecture": "arm64",
+      "id": "sha256:1554a31bb93354cae5feb4bdcccf13ce0d318afe718c3076c7efc8daf0d77aa0",
+      "name": "1554a31bb933",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:15b5170bf5982962f98e8762a2a4696e7aaf4af98c379fbe0bd0ed9f97799110",
+      "name": "15b5170bf598",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:19671ca12a4a566c78826f6ceb243abcc1049da707b31c4f141b069394a15073",
+      "name": "19671ca12a4a",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:68d0f8946d9b4a0b419fc2df9b8fbe47322cb94853036cdef84e62c4f8c86492",
+      "name": "68d0f8946d9b",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:7c1521acaeea387e7e866abb2348e6cb47575c11770a5feaaa34551918dcb906",
+      "name": "7c1521acaeea",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:9791132ca087997fb16b85a6c7b855bc2109b544b85acd57b1eaaaca41f121a1",
+      "name": "9791132ca087",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:a0b6b9959b12656980a650a10bd2ff39e6801c3778245c202f7d8236a1930a6f",
+      "name": "a0b6b9959b12",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:a9e66acd38611b553a2c4b277d0afac3c40152971669e78a185a9a09feb48ecb",
+      "name": "a9e66acd3861",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:c899b77a962e192ab0e0c6bcfcdcc67a73ed84c5916bdcd176686edcebfb0832",
+      "name": "c899b77a962e",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf",
+      "name": "f59abe656b69",
+      "repo_digests": [
+        "alpine@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:fbedfeed1dadbdc40be713cc5df281808742397f6ad1425badaa64a82c877824",
+      "name": "fbedfeed1dad",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:53d86aae2640ebf3da3effe225e893f83edcb8fcadd2f38eaa058e413e83b52d",
+      "name": "inspect-bash_generat-i4scphb-default",
+      "repo_digests": [
+        "inspect-bash_generat-i4scphb-default@sha256:53d86aae2640ebf3da3effe225e893f83edcb8fcadd2f38eaa058e413e83b52d"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:7b5777be1bade44d07db3567ef945a0fa7ad81b78dcf7757bcd32877d52fc971",
+      "name": "inspect-bash_generat-idygdwl-default",
+      "repo_digests": [
+        "inspect-bash_generat-idygdwl-default@sha256:7b5777be1bade44d07db3567ef945a0fa7ad81b78dcf7757bcd32877d52fc971"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:c6526f5e1d1a326609a5cec1c514329dc579f90a09da9df06f8a767a33d4b2b5",
+      "name": "inspect-bash_generat-if3pbe7-default",
+      "repo_digests": [
+        "inspect-bash_generat-if3pbe7-default@sha256:c6526f5e1d1a326609a5cec1c514329dc579f90a09da9df06f8a767a33d4b2b5"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:05526c2c7ac130630dc7b4cd6c9e5b7541d4e3efb29ed7c048a357d63025dda1",
+      "name": "inspect-bash_generat-ih3jovq-default",
+      "repo_digests": [
+        "inspect-bash_generat-ih3jovq-default@sha256:05526c2c7ac130630dc7b4cd6c9e5b7541d4e3efb29ed7c048a357d63025dda1"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:cc4901e3d39d009ec509937c6a63ded22e1d107410151e60553375269617aeed",
+      "name": "inspect-bash_generat-inyuvx4-default",
+      "repo_digests": [
+        "inspect-bash_generat-inyuvx4-default@sha256:cc4901e3d39d009ec509937c6a63ded22e1d107410151e60553375269617aeed"
+      ]
+    }
+  ],
+  "ended": "2026-11-22T21:21:41+00:00",
+  "exit_code": 0,
+  "llama_cpp": {
+    "build": 11612,
+    "commit": "10da8c463",
+    "version": "0.6.0-dev"
+  },
+  "logs": [
+    {
+      "bytes": 225699,
+      "completed": "2026-11-22T21:21:40+00:00",
+      "completed_samples": 5,
+      "eval_config": {
+        "continue_on_fail": false,
+        "epochs": 1,
+        "fail_on_error": false,
+        "limit": [
+          0,
+          5
+        ],
+        "log_images": true,
+        "log_realtime": true,
+        "log_samples": true,
+        "log_shared": 0,
+        "max_samples": 1,
+        "message_limit": 40,
+        "sandbox_cleanup": true,
+        "sandbox_prebuilt": false,
+        "score_display": true,
+        "score_on_error": false,
+        "time_limit": 5400,
+        "token_limit": 1000000
+      },
+      "file": "2026-11-22T19-42-30-00-00_bash-generate-honest_RCRYVhcYZTHnNM9j6sY2KJ.eval",
+      "generate_config": {},
+      "inspect_run_id": "3Ttp8y5nELqRGRbdQZXC7P",
+      "model": "none/none",
+      "model_roles": {
+        "trusted": {
+          "config": {
+            "max_tokens": 4096,
+            "seed": 1,
+            "temperature": 0.0
+          },
+          "model": "openai-api/llama-cpp/ministral-3-8b"
+        },
+        "untrusted": {
+          "config": {
+            "max_tokens": 16384,
+            "seed": 1,
+            "temperature": 0.0
+          },
+          "model": "openai-api/llama-cpp/qwen3.8-27b"
+        }
+      },
+      "samples": 257,
+      "sandbox": {
+        "config": "compose.yaml",
+        "type": "docker"
+      },
+      "sha256": "d1a07848c9ca82162d2cea7cfdeb8a82c410aa79efdf0563940c6c421fb69d41",
+      "started": "2026-11-22T19:42:30+00:00",
+      "status": "success",
+      "task": "bash_generate_honest"
+    }
+  ],
+  "models": [
+    {
+      "file": "Ministral-3-8B-Instruct-2512-Q8_0.gguf",
+      "id": "ministral-3-8b",
+      "server": null,
+      "sha256": "bd0ca58473b64618df4d08c1410cc25c910ca84e647833ebaf099e0fc0523b45",
+      "slots": {
+        "ctx_size": null,
+        "kv_unified_per_slot": 32768,
+        "n_predict": 4096,
+        "parallel": 4,
+        "reasoning_budget": null
+      }
+    },
+    {
+      "file": "Qwen3.8-27B-UD-Q4_K_XL.gguf",
+      "id": "qwen3.8-27b",
+      "server": {
+        "build_info": "b11612-10da8c463",
+        "n_ctx": 32768,
+        "sampling_defaults": {
+          "min_p": 0.05000000074505806,
+          "n_predict": -1,
+          "repeat_penalty": 1.0,
+          "seed": 4294967295,
+          "temperature": 1.0,
+          "top_k": 20,
+          "top_p": 0.949999988079071
+        },
+        "total_slots": 4
+      },
+      "sha256": "3f227079003add2511437e5b1e94812e363385225bf6a9b47b0054a72bc8b01e",
+      "slots": {
+        "ctx_size": null,
+        "kv_unified_per_slot": 32768,
+        "n_predict": 4096,
+        "parallel": 4,
+        "reasoning_budget": 12288
+      }
+    }
+  ],
+  "note": "Run A, the replication of the pilot: honest policy, first 5 Bash tasks, network off",
+  "presets": {
+    "file": "models.research.ini",
+    "sha256": "e6ed8bf8086c256ec9c3a47cdd27076ff4abbe8b73a439ff01e5b17df77ecb89"
+  },
+  "repo": {
+    "commit": "455a471e8f68befc748a3028f173102e58303c0e",
+    "dirty": false,
+    "dirty_files": []
+  },
+  "run_id": "run-a-replication",
+  "schema": 1,
+  "started": "2026-11-22T19:41:53+00:00",
+  "status": "completed",
+  "versions": {
+    "control_arena": "20.1.1",
+    "inspect_ai": "0.3.275",
+    "python": "3.12.14",
+    "uv_lock_sha256": "4778607c5979d16940bd977733e4f9e034d0bee379ea49b53c2ea9004f310d72"
+  }
+}
