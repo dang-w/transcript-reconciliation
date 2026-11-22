@@ -15,8 +15,6 @@ outputs. This repository compares that record with other records of the same run
 | 2. Claim against output | What the model says happened with what the tool output shows | Seen in the pilot: 4 cases the model did not notice |
 | 3. Command against effect | The command string with what happened in the container | Seen in the pilot: 2 cases, which are also 2 of the 4 above (a command chain that stopped before its last command; two calls of one step that ran at the same time on one file) |
 
-It does not build a kernel-level recorder.
-
 ## Status
 
 | | |
