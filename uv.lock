@@ -66,15 +66,6 @@ wheels = [
 ]
 
 [[package]]
-name = "aiofiles"
-version = "25.1.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/41/c3/534eac40372d8ee36ef40df62ec129bee4fdb5ad9706e58a29be53b2c970/aiofiles-25.1.0.tar.gz", hash = "sha256:a8d728f0a29de45dc521f18f07297428d56992a742f0cd2701ba86e44d23d5b2", size = 46354, upload-time = "2025-10-09T20:51:04.358Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/bc/8a/340a1555ae33d7354dbca4faa54948d76d89a27ceef032c8c3bc661d003e/aiofiles-25.1.0-py3-none-any.whl", hash = "sha256:abe311e527c862958650f9438e859c1fa7568a141b22abcd015e120e86a85695", size = 14668, upload-time = "2025-10-09T20:51:03.174Z" },
-]
-
-[[package]]
 name = "aiohappyeyeballs"
 version = "2.7.1"
 source = { registry = "https://pypi.org/simple" }
@@ -802,11 +793,10 @@ wheels = [
 
 [[package]]
 name = "control-arena"
-version = "19.0.0"
+version = "20.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "agentdojo" },
-    { name = "aiofiles" },
     { name = "anthropic" },
     { name = "anyio" },
     { name = "click" },
@@ -832,9 +822,9 @@ dependencies = [
     { name = "seaborn" },
     { name = "sniffio" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/db/75/db04be8bd1d495afee08e079f32704d366550c65860956fd633b87195647/control_arena-19.0.0.tar.gz", hash = "sha256:6c4df42ac9bca9dc20728ee399511e977f6f51a98aecdb6a6ce8f6c575abd706", size = 2839962, upload-time = "2026-07-31T11:42:28.052Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/05/f2/ed411ee646c48abab3c5e4f36264ca5f83345c39afef408b457b46cc3681/control_arena-20.1.1.tar.gz", hash = "sha256:748c83fc8cc8b9cd6091e99c5abec99bb337200d749a0ab277a615f7ae868a11", size = 2920935, upload-time = "2026-10-22T16:09:14.941Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6d/97/80596a6ae335d18f2b21fb73739a56c90639440387536d725f2efd5d41d8/control_arena-19.0.0-py3-none-any.whl", hash = "sha256:c37d87464def7dec4716f695932effb965e58a9876ef5918fb52dbb38ea9d851", size = 1959352, upload-time = "2026-07-31T11:42:26.162Z" },
+    { url = "https://files.pythonhosted.org/packages/ec/47/1d6d4d326c8c85926b57c2f513978374caa25a90730b23b16998e7f0a157/control_arena-20.1.1-py3-none-any.whl", hash = "sha256:440d1dcd550d438be5649bb5069cb9eae3e1d036a377539b609d37f0eee0b5fe", size = 2056816, upload-time = "2026-10-22T16:09:12.869Z" },
 ]
 
 [[package]]
@@ -1460,21 +1450,22 @@ wheels = [
 
 [[package]]
 name = "huggingface-hub"
-version = "0.36.2"
+version = "1.33.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
+    { name = "click" },
     { name = "filelock" },
     { name = "fsspec" },
-    { name = "hf-xet", marker = "platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'arm64' or platform_machine == 'x86_64'" },
+    { name = "hf-xet", marker = "platform_machine == 'AMD64' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'arm64' or platform_machine == 'x86_64'" },
+    { name = "httpx" },
     { name = "packaging" },
     { name = "pyyaml" },
-    { name = "requests" },
     { name = "tqdm" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7c/b7/8cb61d2eece5fb05a83271da168186721c450eb74e3c31f7ef3169fa475b/huggingface_hub-0.36.2.tar.gz", hash = "sha256:1934304d2fb224f8afa3b87007d58501acfda9215b334eed53072dd5e815ff7a", size = 649782, upload-time = "2026-02-06T09:24:13.098Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/25/2a/484d112c0d8fc5f665d7b65137ac9cdb2953c982391598c3597968a12ee7/huggingface_hub-1.33.0.tar.gz", hash = "sha256:367be21a201db9523eddf8aeac7048f2602c1b308691c97640d5e72ed188007e", size = 1043548, upload-time = "2026-09-24T09:49:29.971Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a8/af/48ac8483240de756d2438c380746e7130d1c6f75802ef22f3c6d49982787/huggingface_hub-0.36.2-py3-none-any.whl", hash = "sha256:48f0c8eac16145dfce371e9d2d7772854a4f591bcb56c9cf548accf531d54270", size = 566395, upload-time = "2026-02-06T09:24:11.133Z" },
+    { url = "https://files.pythonhosted.org/packages/fc/16/963096d224b80909432dc16561a615fd33d2d13beef3ce4c63fa25e40867/huggingface_hub-1.33.0-py3-none-any.whl", hash = "sha256:04e434b06e100eddbce9a6e817d72693a7884b10a79bd67ab48080d5c07eb899", size = 846435, upload-time = "2026-09-24T09:49:28.059Z" },
 ]
 
 [[package]]
@@ -4071,7 +4062,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "control-arena", specifier = "==19.0.0" },
+    { name = "control-arena", specifier = "==20.1.1" },
     { name = "inspect-ai", specifier = "==0.3.275" },
 ]
 

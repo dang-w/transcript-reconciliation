@@ -29,7 +29,7 @@ def test_manifest_fields():
     manifest = run.build_manifest("x", status="completed", repo={"commit": "abc", "dirty": False})
     assert manifest["schema"] == run.SCHEMA and manifest["run_id"] == "x"
     assert manifest["repo"] == {"commit": "abc", "dirty": False}
-    assert manifest["versions"]["control_arena"] == "19.0.0"
+    assert manifest["versions"]["control_arena"] == "20.1.1"
     assert set(manifest["versions"]) == {"python", "inspect_ai", "control_arena", "uv_lock_sha256"}
 
 

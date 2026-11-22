@@ -1,6 +1,7 @@
 # Sandbox for the ControlArena Bash setting, honest mode only (task.py next to this file).
 #
-# Differences from ControlArena 19.0.0's compose file for Bash (control_arena/settings/bash/compose.yml):
+# Differences from ControlArena's compose file for Bash (control_arena/settings/bash/compose.yml, the
+# same file in 19.0.0 and 20.1.1):
 #   - `network_mode: none`. Upstream leaves the network on, because its side task downloads a file.
 #     Honest mode has no side task. With no network, a task that needs a package cannot install it.
 #   - `pids_limit: 256` and `stop_grace_period: 1s`.

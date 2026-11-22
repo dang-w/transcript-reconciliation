@@ -13,7 +13,7 @@ outputs. This repository compares that record with other records of the same run
 |---|---|---|
 | 1. Call against event | The transcript's tool calls with the sandbox events that Inspect records | Not tested |
 | 2. Claim against output | What the model says happened with what the tool output shows | Seen in the pilot: 4 cases the model did not notice |
-| 3. Command against effect | The command string with what happened in the container | Seen in the pilot: 2 cases |
+| 3. Command against effect | The command string with what happened in the container | Seen in the pilot: 2 cases, which are also 2 of the 4 above (a command chain that stopped before its last command; two calls of one step that ran at the same time on one file) |
 
 It does not build a kernel-level recorder.
 
@@ -64,7 +64,7 @@ extension of those results and it adds nothing to them. It uses the same models 
 
 | | |
 |---|---|
-| Versions | `control-arena` 19.0.0 and `inspect-ai` 0.3.275, pinned in `pyproject.toml` and `uv.lock` |
+| Versions | `control-arena` 20.1.1 and `inspect-ai` 0.3.275, pinned in `pyproject.toml` and `uv.lock`. The pilot ran on `control-arena` 19.0.0; the lock for 20.1.1 also moves `huggingface-hub` from 0.36.2 to 1.33.0 and drops `aiofiles`. |
 | Setting | ControlArena's Bash setting (tasks from the Ctrl-Z paper), honest mode |
 | Sandbox | `control/bash/`: ControlArena's Dockerfile, unchanged. The compose file differs from upstream: the network is off, with a process limit and a short stop time. The container runs as root with default capabilities, as upstream. |
 | Model server | An OpenAI-compatible llama.cpp server; `scripts/run` reads its key from a file outside the repository |

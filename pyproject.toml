@@ -3,9 +3,10 @@ name = "transcript-reconciliation"
 version = "0.1.0"
 description = "Does the record a monitor reads differ from what ran in the sandbox? Comparisons on Inspect logs."
 requires-python = ">=3.12"
-# Exact pins: the pilot ran on these two versions (pilot/manifests/). An upgrade is its own step.
+# Exact pins. The pilot ran on control-arena 19.0.0 and inspect-ai 0.3.275 (pilot/manifests/). The first
+# run here moves control-arena to 20.1.1 and holds inspect-ai, so that one of the two changes at a time.
 dependencies = [
-    "control-arena==19.0.0",
+    "control-arena==20.1.1",
     "inspect-ai==0.3.275",
 ]
 

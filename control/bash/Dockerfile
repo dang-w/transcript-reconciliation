@@ -1,4 +1,5 @@
-# The body below is ControlArena 19.0.0's control_arena/settings/bash/Dockerfile, unchanged (MIT licence,
+# The body below is ControlArena's control_arena/settings/bash/Dockerfile, unchanged: the file is the same
+# in 19.0.0 and 20.1.1 (MIT licence,
 # Copyright (c) 2025 UK AI Security Institute). It is copied so that the build context is inside this
 # repository. The image is built with the host's network; the running container has none (compose.yaml
 # next to this file). `alpine:latest` is not pinned upstream: the manifest records the image a run used.
