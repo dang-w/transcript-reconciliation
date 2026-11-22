@@ -76,7 +76,7 @@ extension of those results and it adds nothing to them. It uses the same models 
 |---|---|
 | `scripts/readout RUN_ID` or `scripts/readout PATH.eval` | One row per sample, then the counts above |
 | `scripts/run RUN_ID -- eval control/bash/task.py@bash_generate_honest …` | One recorded run: the log in `logs/RUN_ID/`, a manifest in `manifests/`. Refuses a dirty tree unless `--allow-dirty` is given. |
-| `scripts/scan PATH …` | Fails on a home path, a tailnet or private network address or name, a string of a local denylist, key material. Reads `.eval` logs. Reports; never redacts. |
+| `scripts/scan PATH …` | Fails on a home path, a tailnet or private network address or name, a string of a local denylist, key material. Reads `.eval` logs. `--history` also reads every commit. Reports; never redacts. One subnet is exempt, with the reason in `reconcile/scan.py`: the default network of the container tool. |
 | `uv run python -m pytest` | The tests. They need no model and no Docker. |
 
 To reproduce the pilot's readout a reader needs the pilot's log, which is not published. The readout of a run made

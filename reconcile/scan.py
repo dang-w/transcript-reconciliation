@@ -1,13 +1,16 @@
 """Scan: a file that is published must hold no private identifier.
 
     python -m reconcile.scan PATH [PATH ...]      files, directories, Inspect .eval logs
+    python -m reconcile.scan --history            every commit of this repository: author, committer,
+                                                  message and every line that a commit adds or removes
 
 An Inspect `.eval` file is a zip archive with zstd-compressed members; each member is unpacked and
 checked. The scan fails on any of:
 
 - a home-directory path (/Users/..., /home/...);
 - a tailnet address (100.64/10) or a tailnet name (`*.ts.net`);
-- a private network address (10/8, 172.16/12, 192.168/16);
+- a private network address (10/8, 172.16/12, 192.168/16), with one exemption: the subnet in
+  `TOOL_DEFAULT_NETWORKS` below, which a container tool creates with the same numbers on every machine;
 - an mDNS host name (a name that ends in `.local`; a cgroup v2 file name with that ending is a file,
   not a host);
 - a string of the local denylist file: host names, user names, service hosts, one per line, matched
@@ -58,6 +61,13 @@ PATTERNS: dict[str, re.Pattern[bytes]] = {
     ),
     "local host name": re.compile(rb"\b[A-Za-z0-9-]+\.local\b"),
 }
+# Private subnets that are a tool's default, not a network of the machine's owner. An address here is
+# the same on every machine that runs the tool, so it identifies nobody.
+#   192.168.5.0/24: the user-mode network of Lima, which Colima uses for its VM. Colima's template
+#   configuration gives 192.168.5.2 as the default gateway address. A container's /etc/resolv.conf
+#   can name an address of this subnet, and a task can print that file.
+# Only this subnet is exempt. Every other private address stays a finding.
+TOOL_DEFAULT_NETWORKS = re.compile(rb"192\.168\.5\." + OCTET)
 # cgroup v2 files whose names end in `.local` (the `events` and `stat` files of a controller), only
 # as the last component of a path under /sys/fs/cgroup/
 CGROUP_FILE = re.compile(
@@ -68,7 +78,10 @@ DENYLIST_FILE = Path(
 ).expanduser()
 KEY_FILES = [
     Path(p).expanduser()
-    for p in os.environ.get("TR_KEY_FILES", "~/.config/llama/research.key").split(":")
+    for p in os.environ.get(
+        "TR_KEY_FILES",
+        "~/.config/llama/research.key:~/.config/huggingface/transcript-reconciliation.token",
+    ).split(":")
     if p
 ]
 SUFFIXES_SKIPPED = {".png", ".jpg", ".gif", ".pdf", ".gguf", ".pyc"}
@@ -100,6 +113,8 @@ def check_bytes(data: bytes, *, denied: list[bytes], keys: list[bytes]) -> Count
     for rule, pattern in PATTERNS.items():
         for match in pattern.finditer(data):
             if rule == "local host name" and match.end() in cgroup_ends:
+                continue
+            if rule == "private network address" and TOOL_DEFAULT_NETWORKS.fullmatch(match.group()):
                 continue
             found[(rule, match.group().decode(errors="replace"))] += 1
     for word in denied:
@@ -164,7 +179,16 @@ def files_of(paths: list[Path]) -> list[Path]:
     return found
 
 
-def scan(paths: list[Path]) -> list[tuple[str, str, str, str, int]]:
+def history() -> bytes:
+    """Every commit of the repository as text: names, addresses, dates, message, and the full patch."""
+    result = subprocess.run(
+        ["git", "log", "--all", "--format=fuller", "--patch", "--no-color", "--no-ext-diff"],
+        cwd=REPO, capture_output=True, check=True,
+    )  # fmt: skip
+    return result.stdout
+
+
+def scan(paths: list[Path], *, with_history: bool = False) -> list[tuple[str, str, str, str, int]]:
     """(file, member, rule, detail, count) for every finding in the given files."""
     findings: list[tuple[str, str, str, str, int]] = []
     denied = denylist()
@@ -172,6 +196,11 @@ def scan(paths: list[Path]) -> list[tuple[str, str, str, str, int]]:
         findings.append((str(DENYLIST_FILE.name), "", "denylist file missing", "names are not checked", 1))
     keys = key_contents()
     with tempfile.TemporaryDirectory(prefix="scan-") as tmp:
+        if with_history:
+            data = history()
+            for (rule, detail), count in check_bytes(data, denied=denied or [], keys=keys).items():
+                findings.append(("(git history)", "", rule, detail, count))
+            (Path(tmp) / "git-history.txt").write_bytes(data)
         for index, path in enumerate(files_of(paths)):
             for member, data in members(path):
                 if isinstance(data, Exception):
@@ -188,12 +217,18 @@ def scan(paths: list[Path]) -> list[tuple[str, str, str, str, int]]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("paths", nargs="+", type=Path)
+    parser.add_argument("paths", nargs="*", type=Path)
+    parser.add_argument("--history", action="store_true", help="also scan every commit of this repository")
     args = parser.parse_args()
-    findings = scan(args.paths)
+    if not args.paths and not args.history:
+        parser.error("give at least one path, or --history")
+    findings = scan(args.paths, with_history=args.history)
     count = len(files_of(args.paths))
     if not findings:
-        print(f"scan: {count} file(s) clean")
+        commits = subprocess.run(
+            ["git", "rev-list", "--all", "--count"], cwd=REPO, capture_output=True, text=True, check=False
+        ).stdout.strip()
+        print(f"scan: {count} file(s) clean" + (f", {commits} commit(s) clean" if args.history else ""))
         return 0
     for file, member, rule, detail, n in findings:
         where = f"{file}{' :: ' + member if member else ''}"

@@ -24,11 +24,18 @@ def test_tailnet_address_and_name():
 
 
 def test_private_network_addresses():
-    for address in (b"192.168" + b".5.1", b"10" + b".0.0.7", b"172" + b".16.4.2", b"172" + b".31.255.255"):
+    for address in (b"192.168" + b".6.1", b"10" + b".0.0.7", b"172" + b".16.4.2", b"172" + b".31.255.255"):
         assert rules(b"nameserver " + address + b"\n") == {"private network address"}, address
     assert rules(b"172" + b".32.0.1") == set()
     assert rules(b"1.10" + b".0.0.7") == set()  # the tail of a longer dotted number is not an address
     assert rules(b"the 192.168" + b".5.x network") == set()
+
+
+def test_the_lima_default_subnet_is_exempt_and_no_other():
+    assert rules(b"nameserver 192.168" + b".5.1\n") == set()
+    assert rules(b"192.168" + b".5.255") == set()
+    assert rules(b"192.168" + b".50.1") == {"private network address"}
+    assert rules(b"192.168" + b".4.1") == {"private network address"}
 
 
 def test_local_host_names_but_not_cgroup_files():
