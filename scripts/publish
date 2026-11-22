@@ -1,0 +1,6 @@
+#!/bin/sh
+# Publish the logs of one run, by hand (reconcile/publish.py). Without --upload it only checks.
+#   scripts/publish RUN_ID [--upload]
+cd "$(dirname "$0")/.." || exit 1
+. scripts/env.sh
+exec uv run python -m reconcile.publish "$@"

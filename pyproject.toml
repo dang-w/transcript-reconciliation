@@ -8,6 +8,8 @@ requires-python = ">=3.12"
 dependencies = [
     "control-arena==20.1.1",
     "inspect-ai==0.3.275",
+    # used by reconcile/publish.py; control-arena 20.1.1 needs the same range
+    "huggingface-hub>=1.2.0",
 ]
 
 [tool.ruff]

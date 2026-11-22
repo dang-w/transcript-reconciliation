@@ -4051,6 +4051,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "control-arena" },
+    { name = "huggingface-hub" },
     { name = "inspect-ai" },
 ]
 
@@ -4063,6 +4064,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "control-arena", specifier = "==20.1.1" },
+    { name = "huggingface-hub", specifier = ">=1.2.0" },
     { name = "inspect-ai", specifier = "==0.3.275" },
 ]
 

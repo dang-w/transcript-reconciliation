@@ -22,8 +22,9 @@ It does not build a kernel-level recorder.
 | | |
 |---|---|
 | Runs in this repository | None yet |
+| Logs | The dataset [`dang-w/transcript-reconciliation-logs`](https://huggingface.co/datasets/dang-w/transcript-reconciliation-logs), empty until the first run. Git holds a manifest for each run with the sha256 of its log. |
 | Pilot | One private run of 5 samples on 17 November 2026: honest mode, one model, one setting. `pilot/README.md` |
-| Code | A readout, a scan for private identifiers, a run wrapper that writes a manifest. No reconciler yet. |
+| Code | A readout, a scan for private identifiers, a run wrapper that writes a manifest, an upload step that a person starts. No reconciler yet. |
 | Survey | `docs/survey-2026-11-21.md`: versions, the Bash setting and Inspect's sandbox events across versions, the packages the tasks need |
 
 The pilot is a probe, not a result. Its log is not published; its written record is in `pilot/`. The first run
@@ -77,6 +78,7 @@ extension of those results and it adds nothing to them. It uses the same models 
 | `scripts/readout RUN_ID` or `scripts/readout PATH.eval` | One row per sample, then the counts above |
 | `scripts/run RUN_ID -- eval control/bash/task.py@bash_generate_honest …` | One recorded run: the log in `logs/RUN_ID/`, a manifest in `manifests/`. Refuses a dirty tree unless `--allow-dirty` is given. |
 | `scripts/scan PATH …` | Fails on a home path, a tailnet or private network address or name, a string of a local denylist, key material. Reads `.eval` logs. `--history` also reads every commit. Reports; never redacts. One subnet is exempt, with the reason in `reconcile/scan.py`: the default network of the container tool. |
+| `scripts/publish RUN_ID [--upload]` | By hand, one run. Checks the logs against the committed manifest and runs the scan. With `--upload` it puts the logs in the dataset, downloads them again and compares the sha256. Nothing else uploads. |
 | `uv run python -m pytest` | The tests. They need no model and no Docker. |
 
 To reproduce the pilot's readout a reader needs the pilot's log, which is not published. The readout of a run made
