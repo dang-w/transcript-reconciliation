@@ -9,10 +9,13 @@ What it adds to a plain `inspect` call:
 - the logs go to `logs/<run-id>/`; a run id is used once;
 - `docker ps` is sampled during the run, because Inspect removes the image it built when the run ends;
 - `manifests/<run-id>.json` is written also when the run fails or is interrupted: the command, the
-  commit, the package versions, the container images, and the name, size and sha256 of each log.
+  commit, the package versions, the container images, the name, size and sha256 of each log with
+  the settings in its header, and what served the model (reconcile/inference.py): the llama.cpp
+  build, the model files with their sha256, and the server's settings, read while a model is loaded.
 
 No queue, no retry, no upload. The model server's key and address come from the environment
-(scripts/run sets them). The manifest holds no path of the machine and no secret.
+(scripts/run sets them). The manifest holds no path of the machine and no secret: it is not written
+if it contains the home directory or the server's key.
 """
 
 from __future__ import annotations
@@ -21,6 +24,7 @@ import argparse
 import datetime as dt
 import hashlib
 import json
+import os
 import platform
 import re
 import signal
@@ -30,6 +34,8 @@ import threading
 from importlib import metadata
 from pathlib import Path
 from typing import Any
+
+from reconcile import inference
 
 REPO = Path(__file__).resolve().parent.parent
 RUN_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,80}")
@@ -97,18 +103,72 @@ def image_record(name: str) -> dict[str, Any]:
     }
 
 
-def watch_images(images: dict[str, dict[str, Any]], stop: threading.Event) -> None:
+def watch(
+    images: dict[str, dict[str, Any]], servers: dict[str, dict[str, Any]], stop: threading.Event
+) -> None:
+    """During the run: the images of the running containers, and the settings of each loaded model."""
+    base_url, key = os.environ.get("LLAMA_CPP_BASE_URL"), os.environ.get("LLAMA_CPP_API_KEY")
     while not stop.wait(POLL_SECONDS):
         for name in (output("docker", "ps", "--format", "{{.Image}}") or "").split():
             if name not in images:
                 images[name] = image_record(name)
+        if base_url:
+            for model_id in inference.loaded_models(base_url, key):
+                if model_id not in servers and (
+                    settings := inference.server_settings(base_url, key, model_id)
+                ):
+                    servers[model_id] = settings
 
 
 def log_records(log_dir: Path) -> list[dict[str, Any]]:
-    return [
-        {"file": path.name, "bytes": path.stat().st_size, "sha256": sha256_file(path)}
-        for path in sorted(log_dir.glob("*.eval"))
-    ]
+    """One record per .eval file: identity, outcome and the request-side settings of its header."""
+    from inspect_ai.log import read_eval_log  # imported here so that the refusals need no Inspect
+
+    records = []
+    for path in sorted(log_dir.glob("*.eval")):
+        record: dict[str, Any] = {
+            "file": path.name,
+            "bytes": path.stat().st_size,
+            "sha256": sha256_file(path),
+        }
+        try:
+            log = read_eval_log(str(path), header_only=True)
+        except Exception as e:  # a log cut off by a kill is still a log of this run
+            records.append(record | {"status": "unreadable", "error": type(e).__name__, "model": None})
+            continue
+        roles = log.eval.model_roles or {}
+        records.append(
+            record
+            | {
+                "status": log.status,
+                "task": log.eval.task,
+                "model": log.eval.model,
+                # request-side sampling settings of each role (temperature, seed, max_tokens, ...)
+                "model_roles": {
+                    role: {"model": config.model, "config": config.config.model_dump(exclude_none=True)}
+                    for role, config in roles.items()
+                },
+                "samples": log.eval.dataset.samples,
+                "completed_samples": log.results.completed_samples if log.results else None,
+                "generate_config": log.eval.model_generate_config.model_dump(exclude_none=True),
+                "eval_config": log.eval.config.model_dump(exclude_none=True),
+                "sandbox": log.eval.sandbox.model_dump(exclude_none=True) if log.eval.sandbox else None,
+                "inspect_run_id": log.eval.run_id,
+                "started": log.stats.started_at or None,
+                "completed": log.stats.completed_at or None,
+            }
+        )
+    return records
+
+
+def manifest_text(manifest: dict[str, Any]) -> str:
+    """The manifest as JSON. Refused when it holds the home directory or the model server's key."""
+    text = json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+    if str(Path.home()) in text:
+        raise ValueError("the manifest contains the home directory path; it must hold no path of the machine")
+    if (key := os.environ.get("LLAMA_CPP_API_KEY")) and key in text:
+        raise ValueError("the manifest contains the model server's key")
+    return text
 
 
 def build_manifest(run_id: str, **fields: Any) -> dict[str, Any]:
@@ -148,8 +208,9 @@ def main() -> int:
     (REPO / log_dir).mkdir(parents=True, exist_ok=True)
     command = ["inspect", *inspect_args, "--log-dir", log_dir.as_posix()]
     images: dict[str, dict[str, Any]] = {}
+    servers: dict[str, dict[str, Any]] = {}
     stop = threading.Event()
-    watcher = threading.Thread(target=watch_images, args=(images, stop), daemon=True)
+    watcher = threading.Thread(target=watch, args=(images, servers, stop), daemon=True)
     interrupted = False
     started = utc_now()
     child = subprocess.Popen([str(Path(sys.executable).parent / "inspect"), *command[1:]], cwd=REPO)
@@ -169,6 +230,7 @@ def main() -> int:
         watcher.join(timeout=POLL_SECONDS + 30)
 
     status = "interrupted" if interrupted else "completed" if exit_code == 0 else "failed"
+    logs = log_records(REPO / log_dir)
     manifest = build_manifest(
         args.run_id,
         started=started,
@@ -180,10 +242,11 @@ def main() -> int:
         repo=repo,
         allow_dirty=args.allow_dirty,
         container_images=[images[name] for name in sorted(images)],
-        logs=log_records(REPO / log_dir),
+        logs=logs,
+        **inference.record(logs, servers),
     )
     manifest_path.parent.mkdir(exist_ok=True)
-    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    manifest_path.write_text(manifest_text(manifest))
     print(f"reconcile.run: {status}; manifest {manifest_path.relative_to(REPO)}")
     return exit_code
 

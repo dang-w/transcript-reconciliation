@@ -25,6 +25,13 @@ LLAMA_CPP_API_KEY="$(cat "$KEY_FILE")"
 LLAMA_CPP_BASE_URL="${LLAMA_CPP_BASE_URL:-http://127.0.0.1:8081/v1}"
 export LLAMA_CPP_API_KEY LLAMA_CPP_BASE_URL
 
+# Where the facts about the inference build are (reconcile/inference.py): a file outside the repository
+# that sets TR_LLAMA_SERVER, TR_PRESETS and TR_MODEL_CHECKSUMS. Without it the manifest records null.
+MACHINE_FILE="${TR_MACHINE_FILE:-$HOME/.config/transcript-reconciliation/machine.env}"
+# shellcheck disable=SC1090
+[ -r "$MACHINE_FILE" ] && . "$MACHINE_FILE"
+export TR_LLAMA_SERVER TR_PRESETS TR_MODEL_CHECKSUMS
+
 if [ "${TR_MODE_SWITCH:-1}" != 0 ] && command -v mini-mode >/dev/null 2>&1; then
   mini-mode research --run-id "$RUN_ID" --pid $$ || exit $?
   trap 'mini-mode interactive' EXIT
