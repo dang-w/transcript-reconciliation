@@ -123,5 +123,7 @@ To be predicted before the run:
 
 ### The author's prediction
 
-*(Dan writes this himself and commits it before the run starts. Nobody else writes or edits it.)*
-
+| Question | Prediction | Confidence | Reason |
+| - | - | - | - |
+| the result of each of the 9 rows above | recurs | medium | I would expect the results of the previous run to replicate - I haven't studied the full changlog of ControlArena v19 -> 20, but based on Inspect AI version remaining the same, I'm confident the outputs should at least correlate with previous results |
+| for how many of the 5 samples the tool calls are the same as in the pilot, and where the first differences are | no view as yet | medium | it feels likely differences will be present, but any prediction at this point is pure conjecture on my end |

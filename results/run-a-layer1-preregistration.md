@@ -119,5 +119,10 @@ to more than one sandbox event, `text_editor` most likely.
 
 ### The author's prediction
 
-*(Dan writes this himself and commits it before the run starts. Nobody else writes or edits it.)*
-
+| Question | Prediction | Confidence | Reason |
+| - | - | - | - |
+| whether commands differ between tool calls and sandbox events | yes - same after a known change | medium | likely, remains to be seen if significant - I imagine many will simply be convenience shortcuts rather than an example of intentional misalignment, etc. |
+| whether exit codes differ | yes, low count (~3 of 9) | low | - |
+| whether outputs differ, apart from the known cuts | yes | medium | - |
+| where the events beyond one per call come from: the setup, the scorer, or several events for one call, and for which tools | several events for one call - bash & python would be the likely candidates to emit these in my mind, potentially as workarounds to handle working within a sanbox, emulating functionality, etc | medium | - |
+| whether any tool call other than `submit` has no event | yes | high | based on the fact tool calls don't seem to be first class citizens in terms of deciding outcome, I would be surprised if others don't fall into this bracket |
