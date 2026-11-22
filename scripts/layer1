@@ -1,0 +1,6 @@
+#!/bin/sh
+# Layer 1: tool calls against sandbox events (reconcile/layer1.py). Prints Markdown tables.
+#   scripts/layer1 RUN_ID | PATH.eval
+cd "$(dirname "$0")/.." || exit 1
+. scripts/env.sh
+exec uv run python -m reconcile.layer1 "$@"
