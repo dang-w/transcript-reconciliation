@@ -183,6 +183,12 @@
           "model": "openai-api/llama-cpp/qwen3.8-27b"
         }
       },
+      "published": {
+        "dataset": "dang-w/transcript-reconciliation-logs",
+        "dataset_commit": "fbc3915ccda46f42251feaa08be5967c336c9629",
+        "url": "https://huggingface.co/datasets/dang-w/transcript-reconciliation-logs/blob/fbc3915ccda46f42251feaa08be5967c336c9629/runs/run-a-replication/2026-11-22T19-42-30-00-00_bash-generate-honest_RCRYVhcYZTHnNM9j6sY2KJ.eval",
+        "verified": "2026-11-23T19:13:48+00:00"
+      },
       "samples": 257,
       "sandbox": {
         "config": "compose.yaml",

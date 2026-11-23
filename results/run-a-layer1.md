@@ -98,7 +98,7 @@ this, because that log is not published.
 | Question | The author's prediction (confidence) | Result |
 |---|---|---|
 | Do commands differ? | yes, same after a known change (medium) | As predicted: 74 of 79 are the same after a known change, 0 are different, 5 have no command in the call. |
-| Do exit codes differ? | yes, low count (low) | Not comparable: the transcript holds no exit code. 3 events have an exit code other than 0 that the transcript does not show. The author decides how to score this. |
+| Do exit codes differ? | yes, low count (low) | Not comparable: the transcript holds no exit code. 3 events have an exit code other than 0 that the transcript does not show. Scored by the author as a miss (23 November 2026). The question assumed that the transcript holds an exit code. |
 | Do outputs differ, apart from the known cuts? | yes (medium) | No: 0 different. 17 outputs differ only by a known change other than the cut. |
 | Where do the extra events come from? | several events for one call; `bash` and `python` the likely tools (medium) | Not as predicted. `bash` has 1 event for each call, and `python` was not called. The extra events are: 25 outside tool calls (`init`, setup, scorer), and 36 in the first `text_editor` call of 4 samples. |
 | Does a tool call other than `submit` have no event? | yes (high) | No: 0 such calls. |
