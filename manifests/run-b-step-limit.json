@@ -1,0 +1,272 @@
+{
+  "allow_dirty": false,
+  "command": [
+    "inspect",
+    "eval",
+    "control/bash/task.py@bash_generate_honest",
+    "-T",
+    "max_steps=30",
+    "-T",
+    "untrusted=openai-api/llama-cpp/qwen3.8-27b-c131072",
+    "--limit",
+    "1-5",
+    "--max-samples",
+    "1",
+    "--time-limit",
+    "10800",
+    "--message-limit",
+    "100",
+    "--no-fail-on-error",
+    "--log-dir",
+    "logs/run-b-step-limit"
+  ],
+  "container_images": [
+    {
+      "architecture": "arm64",
+      "id": "sha256:15cabee9823e453cda4a6f0ef5eb29aad2e8ead4845cc699691e757a627f33ae",
+      "name": "15cabee9823e",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:1f7a811aec59eb14568cb6bd34e3c5e6533f69d6ee7c126b6c6f840d61e749ea",
+      "name": "1f7a811aec59",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:33748702c62d4cb96ae2927462d3d79f06a14979a40c7c396d99cc04607e3d05",
+      "name": "33748702c62d",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:33978eacc6f0c99af4eefd663e1ea1ca2b2ad8f704aa248a3ed5f438f1a8fc78",
+      "name": "33978eacc6f0",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:5daa384d1ff0104c70d881819e161ce8eece0abde1189b1c3de3b89cb9790e25",
+      "name": "5daa384d1ff0",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:653baeddfe0fa3498a3e6b5062f06f30075e4ca862acfac4ee9c3e9203d7b3f7",
+      "name": "653baeddfe0f",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:7cc796910faa9a4c0190356f5cc041890bbe78a714d19106710f3f65c63e923a",
+      "name": "7cc796910faa",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:b2b12d9cd52915234445a964f11fd1cc6a4096a2c4bf3b73ed0beebca845bd4e",
+      "name": "b2b12d9cd529",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:bd57cd59ec49faaa9a8983e34c8d0bb565dbe60ad0ff8cc7f4c02d0ac8e1b1d8",
+      "name": "bd57cd59ec49",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:c3c7c6e4537f013ea73b247418d206f5f34a7bd7534b0d2fb5be7be03d4e7610",
+      "name": "c3c7c6e4537f",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:e6bb1f0a3a1ef2f54e5b9cfe716b0f4150abd20b7e348631ffad9357b9134ca8",
+      "name": "e6bb1f0a3a1e",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf",
+      "name": "f59abe656b69",
+      "repo_digests": [
+        "alpine@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:f7c52945971aa7e49d2f5022d58ac8b35722e0ba2facf3ab0f7557f19a695556",
+      "name": "f7c52945971a",
+      "repo_digests": []
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:e9cb22d9dd470e5d951e4932c8ce874aa15c989d4552675f2a5185ebb0d9df90",
+      "name": "inspect-bash_generat-i6xturp-default",
+      "repo_digests": [
+        "inspect-bash_generat-i6xturp-default@sha256:e9cb22d9dd470e5d951e4932c8ce874aa15c989d4552675f2a5185ebb0d9df90"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:3a90812295a3445d874ba2adf390b01600cb5a9f6e20523ac644da8976e9d04a",
+      "name": "inspect-bash_generat-i9yzyyu-default",
+      "repo_digests": [
+        "inspect-bash_generat-i9yzyyu-default@sha256:3a90812295a3445d874ba2adf390b01600cb5a9f6e20523ac644da8976e9d04a"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:b8a4952a099f78c308614cddc28310cc73faaf0413e70260bcb3842c15684731",
+      "name": "inspect-bash_generat-ih6wp84-default",
+      "repo_digests": [
+        "inspect-bash_generat-ih6wp84-default@sha256:b8a4952a099f78c308614cddc28310cc73faaf0413e70260bcb3842c15684731"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:11954632a5d9a4ff83b1076a7394de24bdab72cb34eb9e81bf8f729947aec5af",
+      "name": "inspect-bash_generat-iksmuao-default",
+      "repo_digests": [
+        "inspect-bash_generat-iksmuao-default@sha256:11954632a5d9a4ff83b1076a7394de24bdab72cb34eb9e81bf8f729947aec5af"
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "id": "sha256:bb32ce8d43cf760ba55c4da84103d646ad07f066392d7f88ed9b5e065171d007",
+      "name": "inspect-bash_generat-ix8crha-default",
+      "repo_digests": [
+        "inspect-bash_generat-ix8crha-default@sha256:bb32ce8d43cf760ba55c4da84103d646ad07f066392d7f88ed9b5e065171d007"
+      ]
+    }
+  ],
+  "ended": "2026-11-23T21:16:23+00:00",
+  "exit_code": 0,
+  "llama_cpp": {
+    "build": 11612,
+    "commit": "10da8c463",
+    "version": "0.6.0-dev"
+  },
+  "logs": [
+    {
+      "bytes": 237992,
+      "completed": "2026-11-23T21:16:22+00:00",
+      "completed_samples": 4,
+      "eval_config": {
+        "continue_on_fail": false,
+        "epochs": 1,
+        "fail_on_error": false,
+        "limit": [
+          0,
+          5
+        ],
+        "log_images": true,
+        "log_realtime": true,
+        "log_samples": true,
+        "log_shared": 0,
+        "max_samples": 1,
+        "message_limit": 100,
+        "sandbox_cleanup": true,
+        "sandbox_prebuilt": false,
+        "score_display": true,
+        "score_on_error": false,
+        "time_limit": 10800,
+        "token_limit": 1000000
+      },
+      "file": "2026-11-23T19-40-34-00-00_bash-generate-honest_FdaAAvYC3g2zisC8nnUgNC.eval",
+      "generate_config": {},
+      "inspect_run_id": "3f2QiWv7qNFX4zfBrhrgEa",
+      "model": "none/none",
+      "model_roles": {
+        "trusted": {
+          "config": {
+            "max_tokens": 4096,
+            "seed": 1,
+            "temperature": 0.0
+          },
+          "model": "openai-api/llama-cpp/ministral-3-8b"
+        },
+        "untrusted": {
+          "config": {
+            "max_tokens": 16384,
+            "seed": 1,
+            "temperature": 0.0
+          },
+          "model": "openai-api/llama-cpp/qwen3.8-27b-c131072"
+        }
+      },
+      "samples": 257,
+      "sandbox": {
+        "config": "compose.yaml",
+        "type": "docker"
+      },
+      "sha256": "c42df0242e8510f7019b728edd4414fcb39f2d1a8d6164f0e80dadd0e1256a96",
+      "started": "2026-11-23T19:40:34+00:00",
+      "status": "success",
+      "task": "bash_generate_honest"
+    }
+  ],
+  "models": [
+    {
+      "file": "Ministral-3-8B-Instruct-2512-Q8_0.gguf",
+      "id": "ministral-3-8b",
+      "server": null,
+      "sha256": "bd0ca58473b64618df4d08c1410cc25c910ca84e647833ebaf099e0fc0523b45",
+      "slots": {
+        "ctx_size": null,
+        "kv_unified_per_slot": 32768,
+        "n_predict": 4096,
+        "parallel": 4,
+        "reasoning_budget": null
+      }
+    },
+    {
+      "file": "Qwen3.8-27B-UD-Q4_K_XL.gguf",
+      "id": "qwen3.8-27b-c131072",
+      "server": {
+        "build_info": "b11612-10da8c463",
+        "n_ctx": 131072,
+        "sampling_defaults": {
+          "min_p": 0.05000000074505806,
+          "n_predict": -1,
+          "repeat_penalty": 1.0,
+          "seed": 4294967295,
+          "temperature": 1.0,
+          "top_k": 20,
+          "top_p": 0.949999988079071
+        },
+        "total_slots": 1
+      },
+      "sha256": "3f227079003add2511437e5b1e94812e363385225bf6a9b47b0054a72bc8b01e",
+      "slots": {
+        "ctx_size": null,
+        "kv_unified_per_slot": 131072,
+        "n_predict": 4096,
+        "parallel": 1,
+        "reasoning_budget": 12288
+      }
+    }
+  ],
+  "note": null,
+  "presets": {
+    "file": "models.research.ini",
+    "sha256": "858d15aff37d4c5c56b6f9d7560f1c23e34d7b25b64415c14bdf6c14a6f71f5c"
+  },
+  "repo": {
+    "commit": "f7d111022099b8e6982f6ddb72427063a1191bdf",
+    "dirty": false,
+    "dirty_files": []
+  },
+  "run_id": "run-b-step-limit",
+  "schema": 1,
+  "started": "2026-11-23T19:39:55+00:00",
+  "status": "completed",
+  "versions": {
+    "control_arena": "20.1.1",
+    "inspect_ai": "0.3.275",
+    "python": "3.12.14",
+    "uv_lock_sha256": "4778607c5979d16940bd977733e4f9e034d0bee379ea49b53c2ea9004f310d72"
+  }
+}
