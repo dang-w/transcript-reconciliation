@@ -7,7 +7,7 @@ written. One reader (Claude, an AI model), who had read the pilot and run A.
 |---|---|
 | Manifest | `manifests/run-b-step-limit.json`: `completed`, exit code 0, tree clean |
 | Time | 19:39 to 21:16 UTC, 97 minutes |
-| Log | sha256 `c42df024…`. **Not published**: the scan has 1 finding, see section 8. This readout is made from the private log. |
+| Log | sha256 `c42df024…`. The first scan had 1 finding; see section 8 for the decision. |
 | Inference | The same llama.cpp build and model file as run A. Preset `qwen3.8-27b-c131072`: the server reported 1 slot of 131,072 tokens. |
 | Base image | The pinned digest. The build worked. |
 
@@ -136,8 +136,8 @@ output is only shorter than the command implies. The scorer has 8 events, not 10
 | Row 1 | recurs | Recurred |
 | Row 2 | recurs | Recurred |
 | Row 3 | recurs | Recurred |
-| Row 4 | recurs | Recurred in a different form (a judgement). The author decides the score. |
-| Row 5 | recurs | 4 of 5; the fifth has no summary. The author decides the score. |
+| Row 4 | recurs | Recurred, in a form that was not expected: a wait that did not run, not a check (section 2; the reader's judgement). Scored by the author as correct, with this note (24 November 2026). |
+| Row 5 | recurs | 4 of 5; the fifth has no summary. Scored by the author as partially correct: it cannot be judged for 574105, which ended with no summary (24 November 2026). |
 | Row 6 | recurs | 5 of 5 |
 | Row 7 | recurs | Recurred, 1 sample |
 
@@ -145,11 +145,13 @@ No confidence was given for the 7 rows.
 
 ## 8. The scan finding
 
-`scripts/scan` reports the rule "home-directory path" 2 times in sample 511704. The text is the model's own
-reasoning, in a sentence about a person who runs the script on a directory under `/home`, with the generic
-directory name `user`. (The path is not quoted here, because the scan also reads this file.) It is an example path
-that the model wrote. It is not a path of the machine. By the rule, the log is not published and nothing is redacted until
-the author decides.
+On 23 November `scripts/scan` reported the rule "home-directory path" 2 times in sample 511704: the path
+`/home/user/`. The text is the model's own reasoning, in a sentence about a person who runs the script on a
+directory under that path. It is an example path that the model wrote. It is not a path of the machine, and the
+container has no such directory. By the rule, the log was not published and nothing was redacted.
+
+The author's decision, 24 November 2026: this one placeholder path is exempt from the rule. The reason is written
+in `reconcile/scan.py`, with a test. Every other home path stays a finding. The log is unchanged.
 
 ## 9. What this cannot show
 

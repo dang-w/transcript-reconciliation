@@ -14,7 +14,15 @@ def test_clean_text_has_no_finding():
 
 def test_home_directory_paths():
     assert rules(b'File "/Users' + b"/someone/x.py") == {"home-directory path"}
-    assert rules(b"/home" + b"/user/.cache/x") == {"home-directory path"}
+    assert rules(b"/home" + b"/someone/.cache/x") == {"home-directory path"}
+
+
+def test_the_placeholder_home_is_exempt_and_no_other():
+    assert rules(b"cd /home/user/projects") == set()
+    assert rules(b"/Users" + b"/user/projects") == {"home-directory path"}
+    assert rules(b"/home" + b"/user2/x") == {"home-directory path"}
+    assert rules(b"/home" + b"/users/x") == {"home-directory path"}
+    assert rules(b"/home" + b"/User/x") == {"home-directory path"}
 
 
 def test_tailnet_address_and_name():

@@ -7,7 +7,8 @@
 An Inspect `.eval` file is a zip archive with zstd-compressed members; each member is unpacked and
 checked. The scan fails on any of:
 
-- a home-directory path (/Users/..., /home/...);
+- a home-directory path (/Users/..., /home/...), with one exemption: the placeholder path in
+  `PLACEHOLDER_HOME` below, which names no account of a machine;
 - a tailnet address (100.64/10) or a tailnet name (`*.ts.net`);
 - a private network address (10/8, 172.16/12, 192.168/16), with one exemption: the subnet in
   `TOOL_DEFAULT_NETWORKS` below, which a container tool creates with the same numbers on every machine;
@@ -68,6 +69,14 @@ PATTERNS: dict[str, re.Pattern[bytes]] = {
 #   can name an address of this subnet, and a task can print that file.
 # Only this subnet is exempt. Every other private address stays a finding.
 TOOL_DEFAULT_NETWORKS = re.compile(rb"192\.168\.5\." + OCTET)
+# A home path that is a placeholder, not a directory of a person. `/home/user/` is the example path of
+# manuals and of model text: in run B a model wrote it in its reasoning, as an example of a directory
+# that a person can give to a script. The container of the runs has no such directory.
+# Only this one path is exempt, and only under /home. Every other home path stays a finding. The
+# account names of the author's machines are in the denylist, which is checked apart from this rule,
+# so a real path under one of those names is still a finding.
+# Added 24 November 2026, after the scan of the run B log, by the author's decision.
+PLACEHOLDER_HOME = re.compile(rb"/home/user/")
 # cgroup v2 files whose names end in `.local` (the `events` and `stat` files of a controller), only
 # as the last component of a path under /sys/fs/cgroup/
 CGROUP_FILE = re.compile(
@@ -113,6 +122,8 @@ def check_bytes(data: bytes, *, denied: list[bytes], keys: list[bytes]) -> Count
     for rule, pattern in PATTERNS.items():
         for match in pattern.finditer(data):
             if rule == "local host name" and match.end() in cgroup_ends:
+                continue
+            if rule == "home-directory path" and PLACEHOLDER_HOME.fullmatch(match.group()):
                 continue
             if rule == "private network address" and TOOL_DEFAULT_NETWORKS.fullmatch(match.group()):
                 continue
