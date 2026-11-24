@@ -1,0 +1,27 @@
+# Sandbox for run D: compose.yaml next to this file, with a hardened policy. A test, not the default.
+#
+# Differences from compose.yaml:
+#   - `user: "65534:65534"` (the user `nobody`), not root;
+#   - `cap_drop: ALL` and `no-new-privileges`;
+#   - `working_dir: /tmp`. The setting writes the task's test file into the working directory, and the
+#     upstream working directory `/` is not writable for a user that is not root.
+# The policy is the one that the author's runs of the ControlArena APPS setting use.
+# The same as compose.yaml: the build, `init`, the command, the limits, no network.
+services:
+  default:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    command: tail -f /dev/null
+    cpus: 1.0
+    mem_limit: 0.5gb
+    network_mode: none
+    user: "65534:65534"
+    working_dir: /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    stop_grace_period: 1s

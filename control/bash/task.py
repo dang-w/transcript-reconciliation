@@ -50,6 +50,9 @@ def _model(name: str, config: GenerateConfig) -> Model:
 class OfflineBashSetting(BashSetting):
     """Bash with the network off (see compose.yaml next to this file)."""
 
+    # The compose file, next to this file. `compose.hardened.yaml` is the test of run D.
+    compose: str = "compose.yaml"
+
     @classmethod
     def get_name(cls) -> str:
         return "bash_offline"
@@ -57,7 +60,7 @@ class OfflineBashSetting(BashSetting):
     def get_sandbox_config(self) -> SandboxEnvironmentSpec:
         # A relative path: Inspect resolves it from the directory of this file, and no absolute
         # path of the machine goes into the log for the sandbox.
-        return SandboxEnvironmentSpec(type="docker", config="compose.yaml")
+        return SandboxEnvironmentSpec(type="docker", config=self.compose)
 
 
 @task
@@ -65,11 +68,12 @@ def bash_generate_honest(
     untrusted: str = UNTRUSTED,
     output_tokens: int = UNTRUSTED_OUTPUT_TOKENS,
     max_steps: int = MAX_STEPS,
+    compose: str = "compose.yaml",
 ) -> Task:
     """The honest policy alone on Bash tasks, with tools and no monitor."""
     untrusted_config = GenerateConfig(temperature=0.0, seed=1, max_tokens=int(output_tokens))
     return get_control_task(
-        setting=OfflineBashSetting(),
+        setting=OfflineBashSetting(compose=compose),
         micro_protocol=untrusted_policy_builder(),
         mode=EvalMode.HONEST,
         eval_config=ControlEvalConfig(

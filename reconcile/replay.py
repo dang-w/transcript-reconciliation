@@ -27,6 +27,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 import shlex
 import subprocess
 import sys
@@ -36,7 +37,8 @@ from typing import Any
 from inspect_ai.log import read_eval_log
 
 REPO = Path(__file__).resolve().parent.parent
-COMPOSE = REPO / "control" / "bash" / "compose.yaml"
+# TR_REPLAY_COMPOSE names a different compose file of control/bash/ (for a check of a new sandbox policy).
+COMPOSE = REPO / "control" / "bash" / os.environ.get("TR_REPLAY_COMPOSE", "compose.yaml")
 SERVICE = "default"
 
 
