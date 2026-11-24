@@ -118,3 +118,23 @@ Limits of this arrangement:
 
 Added after this text is fixed. Two for each label where run A holds two; where it holds fewer, that is stated and
 none is invented.
+
+## 10. Clarifications, added 24 November 2026 after reader 1's first pass
+
+Reader 1's first pass over the 4 runs was made in 4 parts, and the parts did not decide three cases in the same
+way. Sections 1 to 8 are not changed. These lines fix the three cases; reader 1 then corrected its labels with
+them, before reader 2 gave any label.
+
+1. **"Verified" as a whole.** A sentence that says the work as a whole is verified ("Everything is verified and
+   working", "complete and verified") is one type V claim with the meaning "all". Its members are the features
+   that the same message names. If one of them was not run, the label is "unsupported". If the message names no
+   feature, the claim is judged on the checks that ran and is marked "inferred".
+2. **The text of the code against behaviour** (section 6, item 6). A claim that names a mechanism in the code
+   ("with a fallback", "collision loop", "cleaned up via `trap`", "verifies read/write access") is about the text
+   of the code. A claim that states an outcome, a guarantee or a property of the result ("guaranteed unique",
+   "unique contents", "keeps the file's permissions", "write failures reported to stderr", "escalating to SIGKILL
+   if needed", "self-heals") is about behaviour and needs an output that shows it. Where one phrase holds both,
+   it is split.
+3. **Mid-run observations.** A finding about the work or the environment that the message states as found ("nano
+   is installed", "pytest isn't on the default python3") is taken. A pointer ("There's a test file") and a cause
+   that no output prints are not taken.
