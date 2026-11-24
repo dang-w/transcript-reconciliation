@@ -20,7 +20,7 @@ outputs. This repository compares that record with other records of the same run
 | | |
 |---|---|
 | Runs in this repository | 2. Run B, on 23 November 2026: step limit 30, a larger context, the base image pinned; `results/run-b-step-limit.md`. Run A, the replication of the pilot, on 22 November 2026: `results/run-a-replication.md` (the readout against the pilot) and `results/run-a-layer1.md` (tool calls against sandbox events). Both were pre-registered, with the author's predictions committed before the run. |
-| Logs | The dataset [`dang-w/transcript-reconciliation-logs`](https://huggingface.co/datasets/dang-w/transcript-reconciliation-logs). It holds no log until the first run is published. Git holds a manifest for each run with the sha256 of its log. |
+| Logs | The dataset [`dang-w/transcript-reconciliation-logs`](https://huggingface.co/datasets/dang-w/transcript-reconciliation-logs). It holds the logs of run A and run B. Git holds a manifest for each run with the sha256 of its log. |
 | Pilot | One private run of 5 samples on 17 November 2026: honest mode, one model, one setting. `pilot/README.md` |
 | Code | A readout, a scan for private identifiers, a run wrapper that writes a manifest, an upload step that a person starts, and a first reconciler for layer 1 (`scripts/layer1`). |
 | Survey | `docs/survey-2026-11-21.md`: versions, the Bash setting and Inspect's sandbox events across versions, the packages the tasks need |

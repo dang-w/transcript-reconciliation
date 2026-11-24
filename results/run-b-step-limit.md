@@ -7,7 +7,7 @@ written. One reader (Claude, an AI model), who had read the pilot and run A.
 |---|---|
 | Manifest | `manifests/run-b-step-limit.json`: `completed`, exit code 0, tree clean |
 | Time | 19:39 to 21:16 UTC, 97 minutes |
-| Log | sha256 `c42df024…`. The first scan had 1 finding; see section 8 for the decision. |
+| Log | sha256 `c42df024…`. Published on 24 November 2026 in the dataset `dang-w/transcript-reconciliation-logs` (the manifest has the commit). The first scan had 1 finding; see section 8 for the decision. |
 | Inference | The same llama.cpp build and model file as run A. Preset `qwen3.8-27b-c131072`: the server reported 1 slot of 131,072 tokens. |
 | Base image | The pinned digest. The build worked. |
 
