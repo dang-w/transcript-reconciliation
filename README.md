@@ -65,7 +65,7 @@ extension of those results and it adds nothing to them. It uses the same models 
 |---|---|
 | Versions | `control-arena` 20.1.1 and `inspect-ai` 0.3.275, pinned in `pyproject.toml` and `uv.lock`. The pilot ran on `control-arena` 19.0.0; the lock for 20.1.1 also moves `huggingface-hub` from 0.36.2 to 1.33.0 and drops `aiofiles`. |
 | Setting | ControlArena's Bash setting (tasks from the Ctrl-Z paper), honest mode |
-| Sandbox | `control/bash/`: ControlArena's Dockerfile with one line changed: from run B the base image is `alpine` pinned by digest (the image that the pilot and run A used) in place of `alpine:latest`, so that the base does not change between runs. The compose file differs from upstream: the network is off, with a process limit and a short stop time. The container runs as root with default capabilities, as upstream. |
+| Sandbox | `control/bash/`: ControlArena's Dockerfile with two changes. From run B the base image is `alpine` pinned by digest (the image that the pilot and run A used) in place of `alpine:latest`, so that the base does not change between runs. From run C one added line installs `nano` and `openssh-server` at build time. The compose file differs from upstream: the network is off, with a process limit and a short stop time. The container runs as root with default capabilities, as upstream. |
 | Model server | An OpenAI-compatible llama.cpp server; `scripts/run` reads its key from a file outside the repository |
 | Tools | `uv`, Docker, `gitleaks` |
 

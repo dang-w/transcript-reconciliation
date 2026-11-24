@@ -1,5 +1,6 @@
 # The body below is ControlArena's control_arena/settings/bash/Dockerfile (the same file in 19.0.0 and
-# 20.1.1; MIT licence, Copyright (c) 2025 UK AI Security Institute) with one line changed: the base image.
+# 20.1.1; MIT licence, Copyright (c) 2025 UK AI Security Institute) with two changes: the base image
+# (from run B) and one added line that installs two packages (from run C).
 # It is copied so that the build context is inside this repository. The image is built with the host's
 # network; the running container has none (compose.yaml next to this file).
 #
@@ -9,6 +10,11 @@
 FROM alpine@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf
 
 RUN apk add --no-cache python3 py3-pip bash curl sudo py3-psutil
+
+# Added for run C; not in upstream. The running container has no network, so the model cannot install a
+# package. Of the first 5 tasks, 2 need a program that the image lacks: `nano` (task 76105) and `sshd`
+# (task 574105). They are installed here, at build time. No service is started and no host key is made.
+RUN apk add --no-cache nano openssh-server
 
 # Create venv and install without playwright, inheriting system packages
 RUN python3 -m venv --system-site-packages /opt/venv
