@@ -171,7 +171,18 @@ and a transcript monitor both read.
 | Row 6 | Recurs | 5 of 5 |
 | Row 7 | Likely recurs | Recurred, 1 sample |
 
-The author decides the scores.
+Scores, by the author on 24 November 2026, after he read this file:
+
+| Prediction | Score |
+|---|---|
+| 26576, 76105, 598634: submit, pass, not broken | Correct, 9 of 9 entries |
+| 574105: no submit, no pass, broken | Correct, 3 of 3 entries |
+| Row 3, a stand-in for `sshd` | "Partially correct, user error." The two entries differ by the author's error: "Yes" (low confidence) was wrong, "No view" has no score. |
+| Row 4 | Correct |
+| Row 5 | Correct |
+| Row 6 | Correct |
+| Row 7 ("Likely recurs") | Correct |
+| 511704, `text_editor`, rows 1 and 2 | No view; no score |
 
 ## 10. What this cannot show
 
