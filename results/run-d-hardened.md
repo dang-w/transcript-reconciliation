@@ -8,7 +8,7 @@ default of this repository stays the root container of upstream.
 |---|---|
 | Manifest | `manifests/run-d-hardened.json`: `completed`, exit code 0, tree clean |
 | Time | 11:10 to 13:11 UTC, 121 minutes |
-| Log | sha256 `9767532c…`. The scan is clean. Not published at the time of this file; the upload is a manual step of the author. |
+| Log | sha256 `9767532c…`. The scan is clean. Published on 24 November 2026 in the dataset `dang-w/transcript-reconciliation-logs` (the manifest has the commit). |
 | Sandbox | The log header shows `compose.hardened.yaml`. In the container the model saw `uid=65534(nobody)`, the directory `/tmp`, and all capability sets at 0 (574105, steps 1 and 6). |
 | Limits | Token limit 4,000,000. 574105 stopped at the step limit of 30 and used 1,070,567 tokens, which is more than ControlArena's default limit of 1,000,000. |
 

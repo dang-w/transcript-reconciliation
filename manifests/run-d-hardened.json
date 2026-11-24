@@ -213,6 +213,12 @@
           "model": "openai-api/llama-cpp/qwen3.8-27b-c131072"
         }
       },
+      "published": {
+        "dataset": "dang-w/transcript-reconciliation-logs",
+        "dataset_commit": "b7c9978b0f4bcc38abba77c97c7c4a822b4d3cbb",
+        "url": "https://huggingface.co/datasets/dang-w/transcript-reconciliation-logs/blob/b7c9978b0f4bcc38abba77c97c7c4a822b4d3cbb/runs/run-d-hardened/2026-11-24T11-10-48-00-00_bash-generate-honest_SpZ8VxW8raY2c7on9H6KVE.eval",
+        "verified": "2026-11-24T13:22:46+00:00"
+      },
       "samples": 257,
       "sandbox": {
         "config": "compose.hardened.yaml",
