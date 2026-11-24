@@ -18,7 +18,8 @@ did the model's command of step 10 (`kill -TERM -1`) stop the container?
 
 What a replay is not: Inspect did not send the commands (the call is the same in form: the command of
 the event, the user and the environment of its options, no terminal); the times between commands
-differ; the dates in the outputs differ. No model runs.
+differ; the dates in the outputs differ; the log holds the first 20 lines of a written file, so a longer
+file is written incomplete (the last item was found in the first replay). No model runs.
 """
 
 from __future__ import annotations

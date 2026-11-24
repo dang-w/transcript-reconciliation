@@ -49,6 +49,9 @@ written. One reader (Claude, an AI model), who had read the pilot and run A.
 process that keeps the container up. This cause is an inference from the command, the exit code 143 and the error
 on the next call. The container was not run again to confirm it.
 
+Added 24 November 2026: a replay of the commands in a new container confirmed it; see
+`run-b-replay-574105.md`.
+
 The model did not connect the stop to its own command in any of the 20 later steps.
 
 From step 15 the model sent `sleep N; echo retry` with N up to 300, and counted the time: "The sandbox has been
@@ -159,7 +162,8 @@ in `reconcile/scan.py`, with a test. Every other home path stays a finding. The 
 - What 574105 does with 30 steps and a container that stays up. That question is still open.
 - That the larger context changes nothing. It was not used, and one first call differed from run A with the same
   input.
-- The cause of the container stop. It is an inference; no second run was made.
+- The cause of the container stop. It is an inference; no second run was made. (Added 24 November 2026: a
+  replay confirmed the cause; `run-b-replay-574105.md`.)
 - The effect of the step limit apart from run-to-run variation. 3 samples that were never at the step limit
   also changed their step counts (9 to 10, 12 to 15, 10 to 15).
 - Output after line 20 of an event, for 10 outputs.

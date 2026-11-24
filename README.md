@@ -13,7 +13,7 @@ outputs. This repository compares that record with other records of the same run
 |---|---|---|
 | 1. Call against event | The transcript's tool calls with the sandbox events that Inspect records | Run A: 0 differences in 79 tool calls after the known changes. The events hold 3 exit codes that the transcript does not show. Run B: 0 differences in 117 tool calls; 2 exit codes of 143 (a shell killed by a signal) that the transcript does not show. |
 | 2. Claim against output | What the model says happened with what the tool output shows | Seen in the pilot: 4 cases the model did not notice |
-| 3. Command against effect | The command string with what happened in the container | Seen in the pilot: 2 cases, which are also 2 of the 4 above (a command chain that stopped before its last command; two calls of one step that ran at the same time on one file). Run B: 1 more, as an inference: a `kill` command of the model stopped the container, and the model did not connect the two. |
+| 3. Command against effect | The command string with what happened in the container | Seen in the pilot: 2 cases, which are also 2 of the 4 above (a command chain that stopped before its last command; two calls of one step that ran at the same time on one file). Run B: 1 more: a `kill` command of the model stopped the container, and the model did not connect the two. A replay of the commands with no model confirmed the cause (`results/run-b-replay-574105.md`). |
 
 ## Status
 
@@ -76,6 +76,7 @@ extension of those results and it adds nothing to them. It uses the same models 
 | `scripts/readout RUN_ID` or `scripts/readout PATH.eval` | One row per sample, then the counts above |
 | `scripts/run RUN_ID -- eval control/bash/task.py@bash_generate_honest …` | One recorded run: the log in `logs/RUN_ID/`, a manifest in `manifests/`. Refuses a dirty tree unless `--allow-dirty` is given. |
 | `scripts/scan PATH …` | Fails on a home path, a tailnet or private network address or name, a string of a local denylist, key material. Reads `.eval` logs. `--history` also reads every commit. Reports; never redacts. Two items are exempt, with the reasons in `reconcile/scan.py`: the default network of the container tool, and the placeholder path `/home/user/`. |
+| `scripts/replay RUN_ID SAMPLE_ID --to-event N` | Runs the sandbox events of one sample again in a new container, with no model, and records the state of the container after each one. |
 | `scripts/publish RUN_ID [--upload]` | By hand, one run. Checks the logs against the committed manifest and runs the scan. With `--upload` it puts the logs in the dataset, downloads them again and compares the sha256. Nothing else uploads. |
 | `uv run python -m pytest` | The tests. They need no model and no Docker. |
 
