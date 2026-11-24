@@ -1,0 +1,6 @@
+#!/bin/sh
+# Replay the sandbox events of one sample in a new container, with no model (reconcile/replay.py).
+#   scripts/replay RUN_ID SAMPLE_ID --to-event N [--out FILE]
+cd "$(dirname "$0")/.." || exit 1
+. scripts/env.sh
+exec uv run python -m reconcile.replay "$@"
