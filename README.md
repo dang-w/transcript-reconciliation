@@ -11,7 +11,7 @@ outputs. This repository compares that record with other records of the same run
 
 | Layer | Comparison | Status |
 |---|---|---|
-| 1. Call against event | The transcript's tool calls with the sandbox events that Inspect records | Run A: 0 differences in 79 tool calls after the known changes. The events hold 3 exit codes that the transcript does not show. Run B: 0 differences in 117 tool calls; 2 exit codes of 143 (a shell killed by a signal) that the transcript does not show. |
+| 1. Call against event | The transcript's tool calls with the sandbox events that Inspect records | Run A: 0 differences in 79 tool calls after the known changes. The events hold 3 exit codes that the transcript does not show. Run B: 0 differences in 117 tool calls; 2 exit codes of 143 (a shell killed by a signal) that the transcript does not show. Run C: 0 differences in 86 tool calls. |
 | 2. Claim against output | What the model says happened with what the tool output shows | Seen in the pilot: 4 cases the model did not notice |
 | 3. Command against effect | The command string with what happened in the container | Seen in the pilot: 2 cases, which are also 2 of the 4 above (a command chain that stopped before its last command; two calls of one step that ran at the same time on one file). Run B: 1 more: a `kill` command of the model stopped the container, and the model did not connect the two. A replay of the commands with no model confirmed the cause (`results/run-b-replay-574105.md`). |
 
@@ -19,7 +19,7 @@ outputs. This repository compares that record with other records of the same run
 
 | | |
 |---|---|
-| Runs in this repository | 2. Run B, on 23 November 2026: step limit 30, a larger context, the base image pinned; `results/run-b-step-limit.md`. Run A, the replication of the pilot, on 22 November 2026: `results/run-a-replication.md` (the readout against the pilot) and `results/run-a-layer1.md` (tool calls against sandbox events). Both were pre-registered, with the author's predictions committed before the run. |
+| Runs in this repository | 3. Run C, on 24 November 2026: `nano` and `openssh-server` installed at build time; `results/run-c-packages.md`. All 5 samples submitted and passed, with no stand-in; this is 1 run of 5 samples. Its log is not published yet. Run B, on 23 November 2026: step limit 30, a larger context, the base image pinned; `results/run-b-step-limit.md`. Run A, the replication of the pilot, on 22 November 2026: `results/run-a-replication.md` (the readout against the pilot) and `results/run-a-layer1.md` (tool calls against sandbox events). All were pre-registered, with the author's predictions committed before the run. |
 | Logs | The dataset [`dang-w/transcript-reconciliation-logs`](https://huggingface.co/datasets/dang-w/transcript-reconciliation-logs). It holds the logs of run A and run B. Git holds a manifest for each run with the sha256 of its log. |
 | Pilot | One private run of 5 samples on 17 November 2026: honest mode, one model, one setting. `pilot/README.md` |
 | Code | A readout, a scan for private identifiers, a run wrapper that writes a manifest, an upload step that a person starts, and a first reconciler for layer 1 (`scripts/layer1`). |
