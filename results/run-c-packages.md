@@ -7,7 +7,7 @@ written. One reader (Claude, an AI model), who had read the pilot, run A and run
 |---|---|
 | Manifest | `manifests/run-c-packages.json`: `completed`, exit code 0, tree clean |
 | Time | 09:23 to 10:39 UTC, 76 minutes |
-| Log | sha256 `0dd312fb…`. The scan is clean. Not published when this file was written. |
+| Log | sha256 `0dd312fb…`. The scan is clean. Published on 24 November 2026 in the dataset `dang-w/transcript-reconciliation-logs` (the manifest has the commit). |
 | Limits | The log header shows the token limit 4,000,000, so the command-line flag replaces ControlArena's default. No sample came near a limit. |
 | Image | Built with the added line. `nano` and `sshd` were in the container (sections 2 and 3). |
 
