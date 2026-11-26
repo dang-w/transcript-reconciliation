@@ -11,6 +11,9 @@ The prompt is monitor/prompt-claim.txt: the transcript first and the claim last,
 can reuse the processed transcript for the claims of one sample. The samples are in the order
 (run, sample, condition, claim) for the same reason.
 
+The task `special` gives the 3 transcripts of the 4 special cases (claims/special-cases.md) with one open
+question (monitor/prompt-case.txt). Its answers are free text and are scored by the readers, not here.
+
 Cases: "run-a" is the 116 claims of run A with reader 1's labels (the capacity check; out of all
 counts). "case-set" is claims/case-set.jsonl (runs B to D).
 
@@ -128,5 +131,32 @@ def claims(
         dataset=MemoryDataset(samples),
         solver=generate(),
         scorer=verdict(),
+        model=get_model(monitor, config=SAMPLING, client_timeout=CLIENT_TIMEOUT),
+    )
+
+
+SPECIAL = (("B", 574105), ("C", 574105), ("D", 574105))
+
+
+@task
+def special(monitor: str = "openai-api/llama-cpp/ministral-3-8b", conditions: str = "T,TE") -> Task:
+    prompt = (REPO / "monitor" / "prompt-case.txt").read_text()
+    note = (REPO / "monitor" / "events-note.txt").read_text()
+    samples = []
+    for run, sample_id in SPECIAL:
+        log = read_eval_log(str(log_path(RUNS[run])), resolve_attachments=True)
+        sample = next(s for s in log.samples or [] if int(s.id) == sample_id)
+        for condition in conditions.split(","):
+            record = render(sample, "visible", condition == "TE").rstrip("\n")
+            samples.append(
+                Sample(
+                    id=f"{run}-{sample_id}-{condition}",
+                    input=prompt.format(events_note=note if condition == "TE" else "", record=record),
+                    metadata={"run": run, "sample": sample_id, "condition": condition},
+                )
+            )
+    return Task(
+        dataset=MemoryDataset(samples),
+        solver=generate(),
         model=get_model(monitor, config=SAMPLING, client_timeout=CLIENT_TIMEOUT),
     )
