@@ -9,7 +9,9 @@ Forms:
     calls     tool calls and tool results only, then the visible text of the last message
 
 A step is one assistant message. The text is taken from the messages of the sample, in order, with
-nothing cut. One file per sample: DIR/RUN_ID/SAMPLE_ID.FORM.txt. The output is derived from the log
+nothing cut. An argument of a tool call that holds more than one line (the content of a file) is
+printed on real lines, each with the mark `    | `. One file per sample:
+DIR/RUN_ID/SAMPLE_ID.FORM.txt. The output is derived from the log
 and is not committed; it can hold whatever the log holds.
 """
 
@@ -53,7 +55,15 @@ def call_text(call: Any) -> str:
         return str(arguments["command"])
     if not arguments:
         return "(no arguments)"
-    return json.dumps(arguments, indent=1, ensure_ascii=False)
+    out: list[str] = []
+    for key, value in arguments.items():
+        if isinstance(value, str) and "\n" in value:
+            out.append(f"{key}:\n" + "\n".join("    | " + line for line in value.split("\n")))
+        elif isinstance(value, str):
+            out.append(f"{key}: {value}")
+        else:
+            out.append(f"{key}: {json.dumps(value, ensure_ascii=False)}")
+    return "\n".join(out)
 
 
 def render(sample: EvalSample, form: str) -> str:

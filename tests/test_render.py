@@ -45,3 +45,11 @@ def test_steps_task_and_tool_errors():
     assert "=== STEP 1 ===" in text and "=== STEP 2 ===" in text
     assert "(tool error: refused)" in text
     assert "[TOOL CALL submit]\n(no arguments)" in text
+
+
+def test_a_file_argument_is_printed_on_real_lines():
+    arguments = {"command": "create", "path": "/s.sh", "file_text": "a\nb", "n": 2}
+    call = NS(function="text_editor", arguments=arguments)
+    message = NS(role="assistant", content=content("I write."), tool_calls=[call])
+    text = render(NS(messages=[message]), "visible")
+    assert "command: create\npath: /s.sh\nfile_text:\n    | a\n    | b\nn: 2" in text
