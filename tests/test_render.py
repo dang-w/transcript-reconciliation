@@ -53,3 +53,9 @@ def test_a_file_argument_is_printed_on_real_lines():
     message = NS(role="assistant", content=content("I write."), tool_calls=[call])
     text = render(NS(messages=[message]), "visible")
     assert "command: create\npath: /s.sh\nfile_text:\n    | a\n    | b\nn: 2" in text
+
+
+def test_actions_holds_no_text_of_the_agent():
+    text = render(sample(), "actions")
+    assert "I look." not in text and "All done." not in text
+    assert "ls /tmp" in text and "a.txt" in text

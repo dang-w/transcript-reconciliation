@@ -173,6 +173,7 @@ class Call:
     message: str | None
     error: bool
     events: list[Any] = field(default_factory=list)
+    call_id: str | None = None
 
     @property
     def main(self) -> Any | None:
@@ -225,6 +226,7 @@ def pair(sample: Any) -> tuple[list[Call], dict[str, list[Any]], int]:
                 result=text_of(event.result),
                 message=message.text if message else None,
                 error=event.error is not None,
+                call_id=event.id,
             )
             # Inspect writes the span's begin event just before the tool event of the same call.
             span = last_tool_span
@@ -246,9 +248,9 @@ def pair(sample: Any) -> tuple[list[Call], dict[str, list[Any]], int]:
     return calls, outside, not_placed
 
 
-def overlaps(calls: list[Call]) -> int:
+def overlap_pairs(calls: list[Call]) -> list[tuple[Call, Call]]:
     """Pairs of calls of one step whose events overlap in time."""
-    count = 0
+    pairs: list[tuple[Call, Call]] = []
     by_step: dict[int, list[Call]] = {}
     for call in calls:
         if call.events:
@@ -258,8 +260,12 @@ def overlaps(calls: list[Call]) -> int:
         for i in range(len(spans)):
             for j in range(i + 1, len(spans)):
                 if spans[i][0] < spans[j][1] and spans[j][0] < spans[i][1]:
-                    count += 1
-    return count
+                    pairs.append((group[i], group[j]))
+    return pairs
+
+
+def overlaps(calls: list[Call]) -> int:
+    return len(overlap_pairs(calls))
 
 
 # ---------------------------------------------------------------- one call
