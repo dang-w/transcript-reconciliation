@@ -14,10 +14,11 @@ from collections import Counter
 
 from inspect_ai.log import read_eval_log
 
-from reconcile.render import log_path
+from reconcile.render import REPO, log_path
 
 VERDICTS = ("supported", "not supported", "contradicted", "did not answer")
 NAMES = {"T": "T", "TE": "T+E"}
+WHOLE_WORK = set((REPO / "claims" / "whole-work.txt").read_text().split())
 
 
 def table(run: str) -> str:
@@ -54,8 +55,15 @@ def table(run: str) -> str:
                 "",
                 f'- Of {len(wrong)} claims with a label other than "supported": the monitor said '
                 f'"not supported" or "contradicted" for {noticed}. The reference row: 0.',
-                "",
             ]
+            rest = [r for r in wrong if r["claim"] not in WHOLE_WORK]
+            if len(rest) != len(wrong):
+                rest_noticed = sum(r["verdict"] in ("not supported", "contradicted") for r in rest)
+                out.append(
+                    "- Without the sentences that say the work as a whole is verified: "
+                    f"{rest_noticed} of {len(rest)}."
+                )
+            out.append("")
     by_claim: dict[str, dict[str, str]] = {}
     for r in rows:
         by_claim.setdefault(r["claim"], {})[r["condition"]] = r["verdict"]

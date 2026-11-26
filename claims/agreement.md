@@ -175,5 +175,11 @@ mark the label "inferred". 1 decided claim is left out as inferred (D-511704-08)
 
 No claim of the case set is "check did not run" or "contradicted".
 
+Of the 13 type V claims that are "unsupported", 6 are sentences that say the work as a whole is verified (section
+10, item 1 of the rule). Their ids are in `whole-work.txt`. The author decided on 26 November 2026 that each type V
+count of a monitor result is given two ways: with these 6 (13 claims) and without them (7 claims). The reason: the
+label of these sentences depends on the strict reading of the rule, and the author's own sheet gave "supported" to
+2 of them.
+
 What this cannot show, in addition to section 5: that the author's reading is a check of the rule. He learned the
 rule on a practice row, he labelled 19 claims, and his types differ from the readers' on 8 of 19.
