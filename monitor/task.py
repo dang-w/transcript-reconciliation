@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from pathlib import Path
 
 from inspect_ai import Task, task
@@ -31,9 +32,12 @@ from inspect_ai.model import GenerateConfig, get_model
 from inspect_ai.scorer import Score, Scorer, Target, scorer
 from inspect_ai.solver import TaskState, generate
 
-from reconcile.render import log_path, render
-
+# Inspect loads this file with its own directory as the working directory.
 REPO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO))
+
+from reconcile.render import log_path, render  # noqa: E402
+
 RUNS = {
     "A": "run-a-replication",
     "B": "run-b-step-limit",
