@@ -19,3 +19,6 @@ logs/
 scratch/
 tmp/
 .DS_Store
+
+# Work files of the readers
+claims/work/

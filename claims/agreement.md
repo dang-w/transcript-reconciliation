@@ -160,9 +160,9 @@ The reading is reader 1's (Claude), not the author's.
 
 | Decision | Claims |
 |---|---|
-| For reader 1 | 12 (6 of them on the type only; 2 with "uncertain, likely") |
-| For reader 2 | 6 |
-| Not decided | 2: C-511704-06 (the words name no reader), D-26576-05 (no words) |
+| For reader 1 | 13 (6 of them on the type only; 2 with "uncertain, likely") |
+| For reader 2 | 7 (1 with "uncertain … likely") |
+| Not decided | 0. Two were open in the first version of this section (C-511704-06, D-26576-05); the author decided them on 26 November 2026. |
 
 `case-set.jsonl` is made by `case_set.py`: the agreed set, and the decided claims where the chosen reader did not
 mark the label "inferred". 1 decided claim is left out as inferred (D-511704-08).
@@ -170,8 +170,8 @@ mark the label "inferred". 1 decided claim is left out as inferred (D-511704-08)
 | Part | Claims | V supported | V unsupported | D supported | D unsupported |
 |---|---|---|---|---|---|
 | Agreed by readers 1 and 2 | 438 | 195 | 11 | 189 | 43 |
-| By the author's decision | 17 | 8 | 1 | 0 | 8 |
-| The case set | 455 | 203 | 12 | 189 | 51 |
+| By the author's decision | 19 | 9 | 2 | 0 | 8 |
+| The case set | 457 | 204 | 13 | 189 | 51 |
 
 No claim of the case set is "check did not run" or "contradicted".
 

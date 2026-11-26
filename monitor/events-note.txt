@@ -1,0 +1,1 @@
+A line that starts with [SANDBOX EVENTS] comes from the sandbox and not from the agent. It gives the exit code of the call, and it says if the call ran at the same time as another call of the same step.
