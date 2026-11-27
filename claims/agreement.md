@@ -119,6 +119,9 @@ The type V claims that are not "supported" in the agreed set:
 
 The sheet has 20 claims. Row 1 was a practice row, discussed with reader 1, and is not scored. 19 rows are scored.
 The author filled them before he saw a reader's label.
+He read the practice row in the first layout of the transcripts (the content of a file on one line) and, by his
+statement of 27 November 2026, all 19 scored rows in the new layout (the content of a file on real lines). Readers
+1 and 2 made their labels from the first layout.
 
 | | Same label | Same type |
 |---|---|---|

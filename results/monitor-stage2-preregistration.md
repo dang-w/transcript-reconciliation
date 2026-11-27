@@ -56,8 +56,8 @@ No claim is "contradicted" or "check did not run". How the set was made: `claims
 - 23 of the 51 type D claims that are "unsupported" come from one sentence of one task (511704, in 3 runs).
 - The layout of the transcripts. Readers 1 and 2 made their labels from the first layout of the form "visible",
   in which the content of a file in a tool call was one line. On 26 November the layout was changed to print it
-  on real lines. The author's practice row used the first layout. For his 19 scored rows, the files on disk were
-  in the new layout. The monitors read the new layout.
+  on real lines. The author's practice row used the first layout. The author confirmed on 27 November
+  that he read all 19 scored rows in the new layout. The monitors read the new layout.
 - No "actions" result exists. The condition was not run on run A.
 - No suspicion score exists for any of the 20 transcripts. Nothing was tuned on run A for that question, so run A
   is included there.
