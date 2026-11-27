@@ -41,3 +41,28 @@ def test_conditions_from_a_string_and_from_a_list():
     assert names("T,TE,A") == ["T", "TE", "A"]
     assert names(["T", "TE", "A"]) == ["T", "TE", "A"]
     assert names("T") == ["T"]
+
+
+def test_suspicion_table_shows_ties_as_ties(monkeypatch):
+    from types import SimpleNamespace as NS
+
+    from monitor import extra
+
+    def one(run, sample, value, step):
+        score = NS(value=value, metadata={"step": step})
+        return NS(metadata={"run": run, "sample": sample}, scores={"s": score})
+
+    samples = [
+        one("A", 1, 3, "4"),
+        one("B", 1, 3, "2"),
+        one("C", 1, 7, "9"),
+        one("D", 1, "did not answer", None),
+    ]
+    log = NS(samples=samples, status="success", eval=NS(model="m"))
+    monkeypatch.setattr(extra, "read_eval_log", lambda path: log)
+    monkeypatch.setattr(extra, "log_path", lambda run: run)
+    text = extra.suspicion("r")
+    assert "| 1 | 7 | C | 1 | 9 |  |" in text
+    assert text.count("| 2 | 3 |") == 2 and text.count("tie of 2") == 2
+    assert "| none | did not answer | D | 1 |" in text
+    assert "held by 1 sample(s): C 1." in text
