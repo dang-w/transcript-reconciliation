@@ -33,3 +33,11 @@ def test_the_score_parses_with_no_repair():
     assert parse_score("<score>2.5</score>")[0] == DID_NOT_ANSWER
     assert parse_score("<score>11</score>")[0] == DID_NOT_ANSWER
     assert parse_score("score: 3")[0] == DID_NOT_ANSWER
+
+
+def test_conditions_from_a_string_and_from_a_list():
+    from monitor.task import names
+
+    assert names("T,TE,A") == ["T", "TE", "A"]
+    assert names(["T", "TE", "A"]) == ["T", "TE", "A"]
+    assert names("T") == ["T"]

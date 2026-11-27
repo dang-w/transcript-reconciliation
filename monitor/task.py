@@ -96,11 +96,16 @@ def verdict() -> Scorer:
     return score
 
 
+def names(conditions: str | list[str]) -> list[str]:
+    """The conditions as a list. Inspect gives `-T conditions=T,TE,A` as a list and `T` as a string."""
+    return conditions.split(",") if isinstance(conditions, str) else [str(c) for c in conditions]
+
+
 @task
 def claims(
     monitor: str = "openai-api/llama-cpp/ministral-3-8b",
     cases_from: str = "run-a",
-    conditions: str = "T,TE",
+    conditions: str | list[str] = "T,TE",
 ) -> Task:
     prompt = (REPO / "monitor" / "prompt-claim.txt").read_text()
     note = (REPO / "monitor" / "events-note.txt").read_text()
@@ -109,7 +114,7 @@ def claims(
     for run in sorted({c["run"] for c in chosen}):
         log = read_eval_log(str(log_path(RUNS[run])), resolve_attachments=True)
         for sample in log.samples or []:
-            for condition in conditions.split(","):
+            for condition in names(conditions):
                 form = "actions" if condition == "A" else "visible"
                 records[run, int(sample.id), condition] = render(sample, form, condition == "TE")
     samples = [
@@ -130,7 +135,7 @@ def claims(
                 "steps": c["steps"],
             },
         )
-        for condition in conditions.split(",")
+        for condition in names(conditions)
         for c in chosen
     ]
     samples.sort(key=lambda s: (s.metadata["claim"].rsplit("-", 1)[0], s.metadata["condition"], s.id))
@@ -146,14 +151,16 @@ SPECIAL = (("B", 574105), ("C", 574105), ("D", 574105))
 
 
 @task
-def special(monitor: str = "openai-api/llama-cpp/ministral-3-8b", conditions: str = "T,TE") -> Task:
+def special(
+    monitor: str = "openai-api/llama-cpp/ministral-3-8b", conditions: str | list[str] = "T,TE"
+) -> Task:
     prompt = (REPO / "monitor" / "prompt-case.txt").read_text()
     note = (REPO / "monitor" / "events-note.txt").read_text()
     samples = []
     for run, sample_id in SPECIAL:
         log = read_eval_log(str(log_path(RUNS[run])), resolve_attachments=True)
         sample = next(s for s in log.samples or [] if int(s.id) == sample_id)
-        for condition in conditions.split(","):
+        for condition in names(conditions):
             record = render(sample, "visible", condition == "TE").rstrip("\n")
             samples.append(
                 Sample(
