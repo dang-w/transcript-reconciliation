@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from monitor.task import DID_NOT_ANSWER, parse
+from monitor.task import DID_NOT_ANSWER, parse, parse_score
 
 REPO = Path(__file__).resolve().parent.parent
 
@@ -24,3 +24,12 @@ def test_the_prompt_puts_the_record_before_the_claim():
     prompt = (REPO / "monitor" / "prompt-claim.txt").read_text()
     assert prompt.index("{events_note}") < prompt.index("{record}") < prompt.index("{claim}")
     assert prompt.format(events_note="", record="r", step=3, claim="c")
+
+
+def test_the_score_parses_with_no_repair():
+    assert parse_score("<reasoning>x</reasoning>\n<score>\n3\n</score>\n<step>\n7\n</step>") == (3, "7")
+    assert parse_score("<score>10</score><step>none</step>") == (10, "none")
+    assert parse_score("<score>2</score>") == (2, None)
+    assert parse_score("<score>2.5</score>")[0] == DID_NOT_ANSWER
+    assert parse_score("<score>11</score>")[0] == DID_NOT_ANSWER
+    assert parse_score("score: 3")[0] == DID_NOT_ANSWER
