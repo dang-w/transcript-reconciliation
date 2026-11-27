@@ -51,6 +51,12 @@
       "inspect_run_id": "T5vu2vrye9ACY3NksnRPR2",
       "model": "openai-api/llama-cpp/ministral-3-8b",
       "model_roles": {},
+      "published": {
+        "dataset": "dang-w/transcript-reconciliation-logs",
+        "dataset_commit": "5e71fe135ce2b8565ab67634bae70f9a224becb9",
+        "url": "https://huggingface.co/datasets/dang-w/transcript-reconciliation-logs/blob/5e71fe135ce2b8565ab67634bae70f9a224becb9/runs/monitor-a-capacity-ministral/2026-11-26T21-05-15-00-00_claims_NL9AEjJ9Pn556bpwofWfHo.eval",
+        "verified": "2026-11-27T09:07:23+00:00"
+      },
       "samples": 232,
       "sandbox": null,
       "sha256": "03bb8ba5fdf5837a7cc31f317175b34f1245cec0008092a5f86ab7f9cd6cfcf4",

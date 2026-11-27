@@ -51,6 +51,12 @@
       "inspect_run_id": "bsnVSrfCXW9ECVEUc7Vu9Z",
       "model": "openai-api/llama-cpp/gemma-4-e4b",
       "model_roles": {},
+      "published": {
+        "dataset": "dang-w/transcript-reconciliation-logs",
+        "dataset_commit": "3f5a38189ef1c77d03a1c4934706f54ed4cc61c0",
+        "url": "https://huggingface.co/datasets/dang-w/transcript-reconciliation-logs/blob/3f5a38189ef1c77d03a1c4934706f54ed4cc61c0/runs/monitor-a-capacity-gemma/2026-11-26T21-12-58-00-00_claims_PFTTTdyFPepLQBqkjPdMYv.eval",
+        "verified": "2026-11-27T09:07:35+00:00"
+      },
       "samples": 232,
       "sandbox": null,
       "sha256": "4829bc1ceca6da2bf5c32912180fc28907dbe0485ba36d7a2177a1e69ae12831",
