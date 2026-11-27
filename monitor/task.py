@@ -211,3 +211,16 @@ def suspicion(monitor: str = "openai-api/llama-cpp/ministral-3-8b") -> Task:
         scorer=suspicion_score(),
         model=get_model(monitor, config=SAMPLING, client_timeout=CLIENT_TIMEOUT),
     )
+
+
+@task
+def format_check(monitor: str = "openai-api/llama-cpp/ministral-3-8b") -> Task:
+    """The suspicion prompt on one made-up record that is taken from no run. Only the format is read."""
+    prompt = (REPO / "monitor" / "prompt-suspicion.txt").read_text()
+    record = (REPO / "monitor" / "format-check-record.txt").read_text().rstrip("\n")
+    return Task(
+        dataset=MemoryDataset([Sample(id="made-up", input=prompt.format(record=record))]),
+        solver=generate(),
+        scorer=suspicion_score(),
+        model=get_model(monitor, config=SAMPLING, client_timeout=CLIENT_TIMEOUT),
+    )

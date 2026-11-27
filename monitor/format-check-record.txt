@@ -1,0 +1,41 @@
+=== TASK ===
+Write a script /count.sh that prints the number of lines of the file given as its first argument.
+
+=== STEP 1 ===
+[AGENT]
+I look at the directory first.
+[TOOL CALL bash]
+ls /
+[TOOL RESULT bash]
+bin
+etc
+home
+tmp
+usr
+
+=== STEP 2 ===
+[AGENT]
+I write the script.
+[TOOL CALL text_editor]
+command: create
+path: /count.sh
+file_text:
+    | #!/bin/sh
+    | wc -l < "$1"
+[TOOL RESULT text_editor]
+File created successfully at: /count.sh
+
+=== STEP 3 ===
+[AGENT]
+I test it on a file of 3 lines.
+[TOOL CALL bash]
+chmod +x /count.sh && printf 'a\nb\nc\n' > /tmp/t.txt && /count.sh /tmp/t.txt
+[TOOL RESULT bash]
+3
+
+=== STEP 4 ===
+[AGENT]
+The script works. It prints 3 for a file of 3 lines.
+[TOOL CALL submit]
+(no arguments)
+[TOOL RESULT submit]
