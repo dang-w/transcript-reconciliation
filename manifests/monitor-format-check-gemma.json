@@ -1,0 +1,106 @@
+{
+  "allow_dirty": false,
+  "command": [
+    "inspect",
+    "eval",
+    "monitor/task.py@format_check",
+    "-T",
+    "monitor=openai-api/llama-cpp/gemma-4-e4b",
+    "--no-fail-on-error",
+    "--display",
+    "plain",
+    "--log-dir",
+    "logs/monitor-format-check-gemma"
+  ],
+  "container_images": [],
+  "ended": "2026-11-27T09:19:20+00:00",
+  "exit_code": 0,
+  "llama_cpp": {
+    "build": 11612,
+    "commit": "10da8c463",
+    "version": "0.6.0-dev"
+  },
+  "logs": [
+    {
+      "bytes": 9376,
+      "completed": "2026-11-27T09:19:19+00:00",
+      "completed_samples": 1,
+      "eval_config": {
+        "continue_on_fail": false,
+        "epochs": 1,
+        "fail_on_error": false,
+        "log_images": true,
+        "log_realtime": true,
+        "log_samples": true,
+        "log_shared": 0,
+        "sandbox_cleanup": true,
+        "sandbox_prebuilt": false,
+        "score_display": true,
+        "score_on_error": false
+      },
+      "file": "2026-11-27T09-19-02-00-00_format-check_hYAdsj2wjxT78uP9dZugWM.eval",
+      "generate_config": {
+        "max_tokens": 4096,
+        "seed": 1,
+        "temperature": 0.0
+      },
+      "inspect_run_id": "3gamhk3zW7r5Ty4Jf8LjxS",
+      "model": "openai-api/llama-cpp/gemma-4-e4b",
+      "model_roles": {},
+      "samples": 1,
+      "sandbox": null,
+      "sha256": "91513fa69195573be6c5e6b4a164e1a29f2404f5b0cdde6d0dc994490e57c3c2",
+      "started": "2026-11-27T09:19:02+00:00",
+      "status": "success",
+      "task": "format_check"
+    }
+  ],
+  "models": [
+    {
+      "file": "gemma-4-E4B-it-Q8_0.gguf",
+      "id": "gemma-4-e4b",
+      "server": {
+        "build_info": "b11612-10da8c463",
+        "n_ctx": 32768,
+        "sampling_defaults": {
+          "min_p": 0.05000000074505806,
+          "n_predict": -1,
+          "repeat_penalty": 1.0,
+          "seed": 4294967295,
+          "temperature": 1.0,
+          "top_k": 64,
+          "top_p": 0.949999988079071
+        },
+        "total_slots": 4
+      },
+      "sha256": "34be82b17b4942d389b9b527170c4b058027abdd32531fda063d3d97dd8ce80a",
+      "slots": {
+        "ctx_size": null,
+        "kv_unified_per_slot": 32768,
+        "n_predict": 4096,
+        "parallel": 4,
+        "reasoning_budget": null
+      }
+    }
+  ],
+  "note": "Format check of the suspicion prompt on one made-up record that is taken from no run.",
+  "presets": {
+    "file": "models.research.ini",
+    "sha256": "858d15aff37d4c5c56b6f9d7560f1c23e34d7b25b64415c14bdf6c14a6f71f5c"
+  },
+  "repo": {
+    "commit": "10dc435f6b9c9b74a548caad6ecf795b1622d7e3",
+    "dirty": false,
+    "dirty_files": []
+  },
+  "run_id": "monitor-format-check-gemma",
+  "schema": 1,
+  "started": "2026-11-27T09:19:00+00:00",
+  "status": "completed",
+  "versions": {
+    "control_arena": "20.1.1",
+    "inspect_ai": "0.3.275",
+    "python": "3.12.14",
+    "uv_lock_sha256": "4778607c5979d16940bd977733e4f9e034d0bee379ea49b53c2ea9004f310d72"
+  }
+}
