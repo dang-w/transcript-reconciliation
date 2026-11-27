@@ -1,0 +1,106 @@
+{
+  "allow_dirty": false,
+  "command": [
+    "inspect",
+    "eval",
+    "monitor/task.py@special",
+    "-T",
+    "monitor=openai-api/llama-cpp/gemma-4-e4b",
+    "--max-connections",
+    "4",
+    "--no-fail-on-error",
+    "--log-dir",
+    "logs/monitor-special-gemma"
+  ],
+  "container_images": [],
+  "ended": "2026-11-27T19:36:38+00:00",
+  "exit_code": 0,
+  "llama_cpp": {
+    "build": 11612,
+    "commit": "10da8c463",
+    "version": "0.6.0-dev"
+  },
+  "logs": [
+    {
+      "bytes": 85379,
+      "completed": "2026-11-27T19:36:37+00:00",
+      "completed_samples": 6,
+      "eval_config": {
+        "continue_on_fail": false,
+        "epochs": 1,
+        "fail_on_error": false,
+        "log_images": true,
+        "log_realtime": true,
+        "log_samples": true,
+        "log_shared": 0,
+        "sandbox_cleanup": true,
+        "sandbox_prebuilt": false,
+        "score_display": true,
+        "score_on_error": false
+      },
+      "file": "2026-11-27T19-34-58-00-00_special_QwsVKcv4G3ZHgrY4vDBWsL.eval",
+      "generate_config": {
+        "max_tokens": 4096,
+        "seed": 1,
+        "temperature": 0.0
+      },
+      "inspect_run_id": "VkYmPUyWzfo6n4LqxRH2cg",
+      "model": "openai-api/llama-cpp/gemma-4-e4b",
+      "model_roles": {},
+      "samples": 6,
+      "sandbox": null,
+      "sha256": "34464ccc9df478e3650da1cc746e20d8484df0c01c65e8dfcb9fe71047c4437a",
+      "started": "2026-11-27T19:34:58+00:00",
+      "status": "success",
+      "task": "special"
+    }
+  ],
+  "models": [
+    {
+      "file": "gemma-4-E4B-it-Q8_0.gguf",
+      "id": "gemma-4-e4b",
+      "server": {
+        "build_info": "b11612-10da8c463",
+        "n_ctx": 32768,
+        "sampling_defaults": {
+          "min_p": 0.05000000074505806,
+          "n_predict": -1,
+          "repeat_penalty": 1.0,
+          "seed": 4294967295,
+          "temperature": 1.0,
+          "top_k": 64,
+          "top_p": 0.949999988079071
+        },
+        "total_slots": 4
+      },
+      "sha256": "34be82b17b4942d389b9b527170c4b058027abdd32531fda063d3d97dd8ce80a",
+      "slots": {
+        "ctx_size": null,
+        "kv_unified_per_slot": 32768,
+        "n_predict": 4096,
+        "parallel": 4,
+        "reasoning_budget": null
+      }
+    }
+  ],
+  "note": null,
+  "presets": {
+    "file": "models.research.ini",
+    "sha256": "858d15aff37d4c5c56b6f9d7560f1c23e34d7b25b64415c14bdf6c14a6f71f5c"
+  },
+  "repo": {
+    "commit": "985b91f320ece590d8ca9b58cff831eccd4e12d3",
+    "dirty": false,
+    "dirty_files": []
+  },
+  "run_id": "monitor-special-gemma",
+  "schema": 1,
+  "started": "2026-11-27T19:34:56+00:00",
+  "status": "completed",
+  "versions": {
+    "control_arena": "20.1.1",
+    "inspect_ai": "0.3.275",
+    "python": "3.12.14",
+    "uv_lock_sha256": "4778607c5979d16940bd977733e4f9e034d0bee379ea49b53c2ea9004f310d72"
+  }
+}
